@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CSS Variables for light mode (default) */
+:root {
+  /* Background colors */
+  --background: #ffffff;
+  --background-surface: #f8fafc;
+
+  /* Foreground/text colors */
+  --foreground: #1e293b;
+  --foreground-muted: #64748b;
+
+  /* Brand colors */
+  --color-primary: #1a237e;
+  --color-primary-light: #3949ab;
+  --color-secondary: #3949ab;
+  --color-accent: #d4a017;
+  --color-highlight: #c62828;
+
+  /* Border colors */
+  --border-color: #e2e8f0;
+  --border-color-dark: #cbd5e1;
+
+  /* Focus ring color */
+  --focus-ring: #3949ab;
+}
+
+/* CSS Variables for dark mode (structured for future implementation) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0f172a;
+    --background-surface: #1e293b;
+    --foreground: #f1f5f9;
+    --foreground-muted: #94a3b8;
+    --border-color: #334155;
+    --border-color-dark: #475569;
+    --focus-ring: #6f74dd;
+  }
+}
+
+/* Base body styles */
+body {
+  color: var(--foreground);
+  background: var(--background);
+}
+
+/* Focus visible styles for accessibility */
+@layer utilities {
+  .focus-visible-ring {
+    @apply outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-secondary;
+  }
+
+  /* Touch-friendly interactive element base */
+  .touch-target {
+    @apply min-h-touch min-w-touch;
+  }
+
+  /* Text balance utility */
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Skip navigation link styles */
+.skip-nav-link {
+  @apply absolute left-0 top-0 z-50 -translate-y-full bg-primary px-4 py-2 text-white transition-transform focus:translate-y-0;
+}
+
+/* Base link styles with focus indicators */
+@layer base {
+  a:focus-visible {
+    @apply outline-none ring-2 ring-secondary ring-offset-2 rounded;
+  }
+
+  button:focus-visible {
+    @apply outline-none ring-2 ring-secondary ring-offset-2 rounded;
+  }
+
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    @apply outline-none ring-2 ring-secondary ring-offset-2;
+  }
+}

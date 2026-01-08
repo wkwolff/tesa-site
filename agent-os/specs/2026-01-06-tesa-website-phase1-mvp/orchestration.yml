@@ -1,0 +1,29 @@
+task_groups:
+  - name: Project Setup and Configuration
+    claude_code_subagent: setup
+  - name: Root Layout and Global Components
+    claude_code_subagent: root
+  - name: Homepage Implementation
+    claude_code_subagent: homepage
+  - name: About TESA Page
+    claude_code_subagent: about
+  - name: Program Overview Page
+    claude_code_subagent: program
+  - name: Scholarships Page
+    claude_code_subagent: scholarships
+  - name: Partnerships Page
+    claude_code_subagent: partnerships
+  - name: Contact Page with Form
+    claude_code_subagent: contact
+  - name: Blog/News Framework
+    claude_code_subagent: blog
+  - name: SEO Implementation
+    claude_code_subagent: seo
+  - name: Accessibility Audit and Fixes
+    claude_code_subagent: access
+  - name: Performance Optimization
+    claude_code_subagent: performance
+  - name: Deployment Configuration
+    claude_code_subagent: deploy
+  - name: Test Review and Gap Analysis
+    claude_code_subagent: test
