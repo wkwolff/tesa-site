@@ -1,3 +1,12 @@
+"use client";
+
+import Image from "next/image";
+import { motion, useReducedMotion } from "motion/react";
+import { AnimatedSection } from "@/components/ui/AnimatedSection";
+import { StaggerList, StaggerItem } from "@/components/ui/StaggerList";
+import { VideoPlaceholder } from "@/components/ui/VideoPlaceholder";
+import { fadeInScale, defaultViewport } from "@/lib/animations";
+
 /**
  * SpaceExperience Component
  *
@@ -8,8 +17,15 @@
  * - Space Camp Hall of Fame 2025 inductee (highlighted)
  *
  * Mobile-first design with prominent Hall of Fame highlight.
+ * AnimatedSection wrapper for scroll-triggered fadeInUp animation.
+ * StaggerList applied to experiences grid for sequential reveal.
+ * VideoPlaceholder for future Hall of Fame induction video.
+ *
+ * Photo integration: ILMAH spacesuit and Hall of Fame jacket photos
  */
 export default function SpaceExperience() {
+  const shouldReduceMotion = useReducedMotion();
+
   const experiences = [
     {
       id: "hall-of-fame",
@@ -134,92 +150,168 @@ export default function SpaceExperience() {
   const otherExperiences = experiences.filter((exp) => !exp.highlight);
 
   return (
-    <section
-      className="py-12 sm:py-16 lg:py-20 bg-white"
-      aria-labelledby="space-heading"
-    >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center mb-10 sm:mb-14">
-          <p className="text-sm font-semibold uppercase tracking-wider text-secondary">
-            Space Exploration
-          </p>
-          <h2
-            id="space-heading"
-            className="mt-2 font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-surface-dark"
-          >
-            Space & Analog Astronaut Experience
-          </h2>
-        </div>
+    <AnimatedSection>
+      <section
+        className="py-12 sm:py-16 lg:py-20 bg-white"
+        aria-labelledby="space-heading"
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          {/* Section Header */}
+          <div className="text-center mb-10 sm:mb-14">
+            <p className="text-sm font-semibold uppercase tracking-wider text-secondary">
+              Space Exploration
+            </p>
+            <h2
+              id="space-heading"
+              className="mt-2 font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-surface-dark"
+            >
+              Space & Analog Astronaut Experience
+            </h2>
+          </div>
 
-        {/* Hall of Fame Highlight */}
-        {hallOfFame && (
-          <div className="mb-10 sm:mb-14">
-            <div className="relative overflow-hidden bg-gradient-to-br from-accent via-accent to-accent-dark rounded-2xl p-6 sm:p-8 lg:p-10 text-white shadow-xl">
-              {/* Background decoration */}
-              <div
-                className="absolute inset-0 opacity-10"
-                style={{
-                  backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-                }}
-                aria-hidden="true"
-              />
+          {/* Hall of Fame Highlight */}
+          {hallOfFame && (
+            <div className="mb-10 sm:mb-14">
+              {/* Hall of Fame Video Placeholder */}
+              <div className="mb-6 max-w-2xl mx-auto">
+                <VideoPlaceholder
+                  title="Space Camp Hall of Fame Induction"
+                  aspectRatio="16/9"
+                />
+              </div>
 
-              <div className="relative flex flex-col sm:flex-row items-center gap-6 sm:gap-8">
-                {/* Icon */}
-                <div className="flex-shrink-0 w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center rounded-full bg-white/20 text-white">
-                  {hallOfFame.icon}
-                </div>
+              <div className="relative overflow-hidden bg-gradient-to-br from-accent via-accent to-accent-dark rounded-2xl p-6 sm:p-8 lg:p-10 text-white shadow-xl">
+                {/* Background decoration */}
+                <div
+                  className="absolute inset-0 opacity-10"
+                  style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+                  }}
+                  aria-hidden="true"
+                />
 
-                {/* Content */}
-                <div className="text-center sm:text-left flex-1">
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-2">
-                    <h3 className="font-heading text-2xl sm:text-3xl font-bold">
-                      {hallOfFame.title}
-                    </h3>
-                    <span className="inline-flex self-center sm:self-auto items-center px-3 py-1 rounded-full text-sm font-bold bg-white text-accent">
-                      {hallOfFame.year}
-                    </span>
+                <div className="relative flex flex-col lg:flex-row items-center gap-6 lg:gap-10">
+                  {/* Left: Icon and Content */}
+                  <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-8 flex-1">
+                    {/* Icon */}
+                    <div className="flex-shrink-0 w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center rounded-full bg-white/20 text-white">
+                      {hallOfFame.icon}
+                    </div>
+
+                    {/* Content */}
+                    <div className="text-center sm:text-left flex-1">
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-2">
+                        <h3 className="font-heading text-2xl sm:text-3xl font-bold">
+                          {hallOfFame.title}
+                        </h3>
+                        <span className="inline-flex self-center sm:self-auto items-center px-3 py-1 rounded-full text-sm font-bold bg-white text-accent">
+                          {hallOfFame.year}
+                        </span>
+                      </div>
+                      <p className="text-white/90 text-base sm:text-lg leading-relaxed">
+                        {hallOfFame.description}
+                      </p>
+                    </div>
                   </div>
-                  <p className="text-white/90 text-base sm:text-lg leading-relaxed">
-                    {hallOfFame.description}
-                  </p>
+
+                  {/* Right: Hall of Fame Jacket Photo */}
+                  <motion.div
+                    className="flex-shrink-0 w-full sm:w-64 lg:w-72"
+                    initial={shouldReduceMotion ? false : "hidden"}
+                    whileInView="visible"
+                    viewport={defaultViewport}
+                    variants={fadeInScale}
+                  >
+                    <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-lg ring-4 ring-white/20">
+                      <Image
+                        src="/images/experiences/hall-of-fame-jacket.jpg"
+                        alt="Space Camp Hall of Fame jacket and medal awarded to Diallo Wallace in 2025"
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 256px, 288px"
+                        className="object-cover"
+                      />
+                    </div>
+                  </motion.div>
                 </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
 
-        {/* Other Experiences Grid */}
-        <div className="grid gap-6 md:grid-cols-2">
-          {otherExperiences.map((exp) => (
-            <div
-              key={exp.id}
-              className="flex gap-4 p-6 bg-surface rounded-xl border border-gray-100 hover:shadow-md transition-shadow"
-            >
-              {/* Icon */}
-              <div className="flex-shrink-0 w-14 h-14 flex items-center justify-center rounded-lg bg-primary/10 text-primary">
-                {exp.icon}
-              </div>
+          {/* ILMAH Spacesuit Photo Feature */}
+          <div className="mb-10 sm:mb-14">
+            <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12 bg-surface rounded-2xl p-6 sm:p-8 lg:p-10">
+              {/* Photo */}
+              <motion.div
+                className="flex-shrink-0 w-full md:w-80 lg:w-96"
+                initial={shouldReduceMotion ? false : "hidden"}
+                whileInView="visible"
+                viewport={defaultViewport}
+                variants={fadeInScale}
+              >
+                <div className="relative aspect-[3/4] rounded-xl overflow-hidden shadow-lg">
+                  <Image
+                    src="/images/experiences/ilmah-spacesuit.jpg"
+                    alt="Diallo Wallace testing spacesuit at University of North Dakota ILMAH facility"
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 320px, 384px"
+                    className="object-cover"
+                  />
+                </div>
+              </motion.div>
 
               {/* Content */}
-              <div className="flex-1">
-                <div className="flex flex-wrap items-center gap-2 mb-2">
-                  <h3 className="font-heading text-lg font-semibold text-surface-dark">
-                    {exp.title}
-                  </h3>
-                  <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-secondary/10 text-secondary">
-                    {exp.year}
-                  </span>
-                </div>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  {exp.description}
+              <div className="flex-1 text-center md:text-left">
+                <p className="text-sm font-semibold uppercase tracking-wider text-secondary mb-2">
+                  Analog Astronaut Training
+                </p>
+                <h3 className="font-heading text-xl sm:text-2xl font-bold text-surface-dark mb-4">
+                  ILMAH Spacesuit Evaluations
+                </h3>
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  As an analog astronaut at the University of North Dakota&apos;s
+                  Inflatable Lunar and Mars Habitat (ILMAH), Diallo Wallace
+                  conducted critical spacesuit evaluations to support research
+                  on future planetary exploration equipment.
+                </p>
+                <p className="text-gray-600 leading-relaxed">
+                  This hands-on experience with prototype spacesuits contributes
+                  to the development of life support systems and mobility
+                  solutions for astronauts on the Moon and Mars.
                 </p>
               </div>
             </div>
-          ))}
+          </div>
+
+          {/* Other Experiences Grid - StaggerList for sequential reveal */}
+          <StaggerList className="grid gap-6 md:grid-cols-2" staggerDelay={0.1}>
+            {otherExperiences.map((exp) => (
+              <StaggerItem key={exp.id}>
+                <div className="flex gap-4 p-6 bg-surface rounded-xl border border-gray-100 hover:shadow-md transition-shadow">
+                  {/* Icon */}
+                  <div className="flex-shrink-0 w-14 h-14 flex items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    {exp.icon}
+                  </div>
+
+                  {/* Content */}
+                  <div className="flex-1">
+                    <div className="flex flex-wrap items-center gap-2 mb-2">
+                      <h3 className="font-heading text-lg font-semibold text-surface-dark">
+                        {exp.title}
+                      </h3>
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-secondary/10 text-secondary">
+                        {exp.year}
+                      </span>
+                    </div>
+                    <p className="text-sm text-gray-600 leading-relaxed">
+                      {exp.description}
+                    </p>
+                  </div>
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerList>
         </div>
-      </div>
-    </section>
+      </section>
+    </AnimatedSection>
   );
 }

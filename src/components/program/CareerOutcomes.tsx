@@ -26,7 +26,7 @@ export default function CareerOutcomes() {
       title: "Mission Operations Specialist",
       salary: "$75,000 - $130,000",
       description: "Control and monitor spacecraft operations",
-      growth: "Growing field",
+      growth: "Growing",
     },
     {
       title: "Systems Engineer",
@@ -129,7 +129,7 @@ export default function CareerOutcomes() {
             {/* Mobile: Vertical */}
             <div className="md:hidden space-y-4">
               {[
-                { stage: "TESA Student", years: "Grades 6-12", color: "bg-primary" },
+                { stage: "TESA Student", years: "High School", color: "bg-primary" },
                 { stage: "University", years: "4-5 years", color: "bg-secondary" },
                 { stage: "Entry Level", years: "0-3 years exp", color: "bg-accent" },
                 { stage: "Senior Role", years: "5+ years exp", color: "bg-green-600" },
@@ -148,67 +148,73 @@ export default function CareerOutcomes() {
               ))}
             </div>
 
-            {/* Desktop: Horizontal */}
+            {/* Desktop: Horizontal - Segmented Progress Bar Design */}
             <div className="hidden md:block">
-              <div className="flex items-center justify-between">
+              {/* Stage Labels Above */}
+              <div className="grid grid-cols-4 gap-0 mb-3">
                 {[
-                  { stage: "TESA Student", years: "Grades 6-12", color: "bg-primary" },
-                  { stage: "University", years: "4-5 years", color: "bg-secondary" },
-                  { stage: "Entry Level", years: "0-3 years exp", color: "bg-accent" },
-                  { stage: "Senior Role", years: "5+ years exp", color: "bg-green-600" },
-                ].map((item, index, arr) => (
-                  <div key={item.stage} className="flex items-center">
-                    <div className="text-center">
-                      <div
-                        className={`h-16 w-16 mx-auto rounded-full ${item.color} flex items-center justify-center text-white font-bold text-lg shadow-lg`}
-                      >
-                        {index + 1}
-                      </div>
-                      <p className="mt-3 font-semibold text-surface-dark">
-                        {item.stage}
-                      </p>
-                      <p className="text-sm text-gray-500">{item.years}</p>
-                    </div>
-                    {index < arr.length - 1 && (
-                      <div className="flex-1 mx-4">
-                        <div className="h-1 bg-gradient-to-r from-gray-300 to-gray-300 rounded-full" />
-                        <svg
-                          className="h-6 w-6 mx-auto -mt-3 text-gray-400"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          strokeWidth={2}
-                          aria-hidden="true"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M13 7l5 5m0 0l-5 5m5-5H6"
-                          />
-                        </svg>
-                      </div>
-                    )}
+                  { stage: "TESA Student", years: "High School" },
+                  { stage: "University", years: "4-5 years" },
+                  { stage: "Entry Level", years: "0-3 years exp" },
+                  { stage: "Senior Role", years: "5+ years exp" },
+                ].map((item) => (
+                  <div key={item.stage} className="text-center px-2">
+                    <p className="font-semibold text-surface-dark text-sm">
+                      {item.stage}
+                    </p>
+                    <p className="text-xs text-gray-600">{item.years}</p>
                   </div>
                 ))}
+              </div>
+
+              {/* Chunky Segmented Progress Bar */}
+              <div className="flex h-4 rounded-full overflow-hidden shadow-inner bg-gray-100">
+                <div className="flex-1 bg-primary" />
+                <div className="flex-1 bg-secondary" />
+                <div className="flex-1 bg-accent" />
+                <div className="flex-1 bg-green-500" />
+              </div>
+
+              {/* Milestone Markers */}
+              <div className="relative h-6 mt-1">
+                <div className="absolute left-0 flex flex-col items-center">
+                  <div className="w-3 h-3 rounded-full bg-primary border-2 border-white shadow" />
+                </div>
+                <div className="absolute left-1/4 -translate-x-1/2 flex flex-col items-center">
+                  <div className="w-3 h-3 rounded-full bg-secondary border-2 border-white shadow" />
+                </div>
+                <div className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center">
+                  <div className="w-3 h-3 rounded-full bg-accent border-2 border-white shadow" />
+                </div>
+                <div className="absolute left-3/4 -translate-x-1/2 flex flex-col items-center">
+                  <div className="w-3 h-3 rounded-full bg-green-500 border-2 border-white shadow" />
+                </div>
+                <div className="absolute right-0 flex flex-col items-center">
+                  <div className="w-4 h-4 rounded-full bg-green-600 border-2 border-white shadow flex items-center justify-center">
+                    <svg className="w-2 h-2 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                </div>
               </div>
             </div>
 
             {/* Salary Progression */}
             <div className="mt-8 grid grid-cols-4 gap-2 text-center">
               <div className="p-2 bg-primary/10 rounded-lg">
-                <p className="text-xs text-gray-500">Start</p>
+                <p className="text-xs text-gray-600">Start</p>
                 <p className="font-bold text-primary">$0</p>
               </div>
               <div className="p-2 bg-secondary/10 rounded-lg">
-                <p className="text-xs text-gray-500">Internship</p>
+                <p className="text-xs text-gray-600">Internship</p>
                 <p className="font-bold text-secondary">$25K+</p>
               </div>
               <div className="p-2 bg-accent/10 rounded-lg">
-                <p className="text-xs text-gray-500">Entry</p>
+                <p className="text-xs text-gray-600">Entry</p>
                 <p className="font-bold text-accent-dark">$75K+</p>
               </div>
               <div className="p-2 bg-green-100 rounded-lg">
-                <p className="text-xs text-gray-500">Senior</p>
+                <p className="text-xs text-gray-600">Senior</p>
                 <p className="font-bold text-green-600">$150K+</p>
               </div>
             </div>

@@ -13,24 +13,24 @@ import {
  * Unique title and description with Open Graph and Twitter Card tags
  */
 export const metadata: Metadata = {
-  title: "TESA | Credit-Bearing Aerospace Courses for Grades 6-12",
+  title: "TESA | Credit-Bearing Aerospace Courses for High School Students",
   description:
-    "The Engineering and Science Academy (TESA) offers credit-bearing aerospace courses for grades 6-12. Prepare your child for STEM success with hands-on learning, industry certifications in MATLAB and STK, and mentorship from aerospace professionals.",
+    "The Engineering and Science Academy (TESA) offers credit-bearing aerospace courses for high school students. Prepare your child for STEM success with hands-on learning, industry certifications in MATLAB and STK, and mentorship from aerospace professionals.",
   keywords: [
     "aerospace education",
-    "STEM courses grades 6-12",
+    "STEM courses for high school",
     "pre-college engineering",
     "MATLAB certification",
     "aerospace courses for students",
     "space education",
-    "engineering courses for middle school",
+    "college prep engineering",
     "engineering courses for high school",
   ],
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "TESA | Credit-Bearing Aerospace Courses for Grades 6-12",
+    title: "TESA | Credit-Bearing Aerospace Courses for High School Students",
     description:
       "Prepare your child for STEM success with hands-on aerospace education, industry certifications, and mentorship from aerospace professionals.",
     url: "https://tesa4space.org",
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "TESA | Credit-Bearing Aerospace Courses for Grades 6-12",
+    title: "TESA | Credit-Bearing Aerospace Courses for High School Students",
     description:
       "Prepare your child for STEM success with hands-on aerospace education, industry certifications, and mentorship.",
   },
@@ -59,7 +59,7 @@ function JsonLdSchema() {
     url: "https://tesa4space.org",
     logo: "https://tesa4space.org/images/tesa_logo.png",
     description:
-      "A pre-college hybrid school offering credit-bearing aerospace courses for grades 6-12, designed to prepare students for academic and technical rigor in STEM majors.",
+      "A pre-college hybrid school offering credit-bearing aerospace courses for high school students, designed to prepare students for academic and technical rigor in STEM majors.",
     email: "diallo@tesa4space.org",
     sameAs: [],
     address: {
@@ -73,26 +73,29 @@ function JsonLdSchema() {
     foundingDate: "2024",
     founder: {
       "@type": "Person",
-      name: "Diallo Wallace",
+      name: "Lt. Commander Diallo Wallace",
       jobTitle: "Founder",
       description:
-        "Naval Academy aerospace engineering professor, Space Camp Hall of Fame 2025 inductee, and Purdue PhD candidate in Engineering Education",
+        "25+ year naval aviator and aerospace engineer. Instructs aeronautics, astronautics, and MATLAB at U.S. Naval Academy. PhD candidate in Engineering Education at Purdue University. Mission Commander, Flashline Mars Arctic Research Station. Space Camp Hall of Fame 2025 inductee.",
     },
     hasCredential: [
       {
         "@type": "EducationalOccupationalCredential",
-        name: "MATLAB Certification",
+        name: "MATLAB Certified Associate",
         credentialCategory: "Industry Certification",
+        description: "Earned after completing foundational courses plus one application course",
       },
       {
         "@type": "EducationalOccupationalCredential",
-        name: "Ansys STK Certification",
+        name: "Ansys STK Certifications",
         credentialCategory: "Industry Certification",
+        description: "Multiple progressive certifications earned after each space course",
       },
       {
         "@type": "EducationalOccupationalCredential",
         name: "PMI CAPM Certification",
         credentialCategory: "Industry Certification",
+        description: "Earned in senior year with established portfolio",
       },
     ],
     teaches: [
@@ -103,11 +106,11 @@ function JsonLdSchema() {
       "Mathematics",
       "Rocketry",
     ],
-    educationalLevel: ["Middle School", "High School"],
+    educationalLevel: ["High School"],
     audience: {
       "@type": "EducationalAudience",
       educationalRole: "student",
-      audienceType: "Grades 6-12",
+      audienceType: "High School Students",
     },
   };
 

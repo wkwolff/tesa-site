@@ -1,4 +1,10 @@
+"use client";
+
 import Link from "next/link";
+import { motion, useReducedMotion } from "motion/react";
+import { AnimatedSection } from "@/components/ui/AnimatedSection";
+import { StaggerList, StaggerItem } from "@/components/ui/StaggerList";
+import { cardHover } from "@/lib/animations";
 
 /**
  * AudienceCTAs Component
@@ -9,8 +15,11 @@ import Link from "next/link";
  * - Students -> /contact
  *
  * Mobile-first design: single column on mobile, three columns on desktop.
+ * Includes scroll-triggered stagger animations and hover effects.
  */
 export default function AudienceCTAs() {
+  const shouldReduceMotion = useReducedMotion();
+
   const audiences = [
     {
       id: "funders",
@@ -108,77 +117,81 @@ export default function AudienceCTAs() {
   };
 
   return (
-    <section
-      className="py-12 sm:py-16 lg:py-20 bg-white"
-      aria-labelledby="audience-ctas-heading"
-    >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Section heading */}
-        <div className="text-center mb-10 sm:mb-12">
-          <h2
-            id="audience-ctas-heading"
-            className="text-2xl sm:text-3xl font-heading font-bold text-surface-dark"
-          >
-            How Can We Help You?
-          </h2>
-          <p className="mt-3 text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
-            Whether you&apos;re a funder, parent, or student, TESA has a path
-            for you.
-          </p>
-        </div>
+    <AnimatedSection>
+      <section
+        className="py-12 sm:py-16 lg:py-20 bg-white"
+        aria-labelledby="audience-ctas-heading"
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          {/* Section heading */}
+          <div className="text-center mb-10 sm:mb-12">
+            <h2
+              id="audience-ctas-heading"
+              className="text-2xl sm:text-3xl font-heading font-bold text-surface-dark"
+            >
+              How Can We Help You?
+            </h2>
+            <p className="mt-3 text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
+              Whether you&apos;re a funder, parent, or student, TESA has a path
+              for you.
+            </p>
+          </div>
 
-        {/* Audience cards grid */}
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
-          {audiences.map((audience) => {
-            const styles = colorStyles[audience.color as keyof typeof colorStyles];
-            return (
-              <article
-                key={audience.id}
-                className={`flex flex-col p-6 sm:p-8 bg-white rounded-xl shadow-sm border-2 ${styles.border} transition-all hover:shadow-lg`}
-              >
-                {/* Icon */}
-                <div
-                  className={`flex items-center justify-center h-14 w-14 rounded-xl ${styles.icon} mb-5`}
-                >
-                  {audience.icon}
-                </div>
-
-                {/* Title */}
-                <h3 className="font-heading text-xl font-semibold text-surface-dark mb-3">
-                  {audience.title}
-                </h3>
-
-                {/* Description */}
-                <p className="text-gray-600 mb-6 flex-grow">
-                  {audience.description}
-                </p>
-
-                {/* CTA Button - full width on mobile */}
-                <Link
-                  href={audience.href}
-                  className={`inline-flex items-center justify-center min-h-touch w-full px-6 py-3 text-base font-semibold rounded-lg transition-colors focus-visible-ring ${styles.button}`}
-                >
-                  {audience.cta}
-                  <svg
-                    className="ml-2 h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                    aria-hidden="true"
+          {/* Audience cards grid with stagger animation */}
+          <StaggerList className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
+            {audiences.map((audience) => {
+              const styles = colorStyles[audience.color as keyof typeof colorStyles];
+              return (
+                <StaggerItem key={audience.id}>
+                  <motion.article
+                    className={`flex flex-col p-6 sm:p-8 bg-white rounded-xl shadow-sm border-2 ${styles.border} transition-all hover:shadow-lg`}
+                    whileHover={shouldReduceMotion ? undefined : cardHover}
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-                    />
-                  </svg>
-                </Link>
-              </article>
-            );
-          })}
+                    {/* Icon */}
+                    <div
+                      className={`flex items-center justify-center h-14 w-14 rounded-xl ${styles.icon} mb-5`}
+                    >
+                      {audience.icon}
+                    </div>
+
+                    {/* Title */}
+                    <h3 className="font-heading text-xl font-semibold text-surface-dark mb-3">
+                      {audience.title}
+                    </h3>
+
+                    {/* Description */}
+                    <p className="text-gray-600 mb-6 flex-grow">
+                      {audience.description}
+                    </p>
+
+                    {/* CTA Button - full width on mobile */}
+                    <Link
+                      href={audience.href}
+                      className={`inline-flex items-center justify-center min-h-touch w-full px-6 py-3 text-base font-semibold rounded-lg transition-colors focus-visible-ring ${styles.button}`}
+                    >
+                      {audience.cta}
+                      <svg
+                        className="ml-2 h-5 w-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                        aria-hidden="true"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                        />
+                      </svg>
+                    </Link>
+                  </motion.article>
+                </StaggerItem>
+              );
+            })}
+          </StaggerList>
         </div>
-      </div>
-    </section>
+      </section>
+    </AnimatedSection>
   );
 }

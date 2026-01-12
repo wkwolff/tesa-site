@@ -74,10 +74,27 @@ export default function ContactPage() {
     <>
       {/* Page Header */}
       <section
-        className="bg-gradient-to-br from-primary via-primary-800 to-secondary py-12 sm:py-16 lg:py-20"
+        className="relative bg-gradient-to-br from-primary via-primary-800 to-secondary py-12 sm:py-16 lg:py-20 overflow-hidden"
         aria-labelledby="contact-heading"
       >
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+        {/* Animated star field background */}
+        <div
+          className="star-field absolute inset-0 pointer-events-none"
+          aria-hidden="true"
+        >
+          <span className="star-field-large" />
+        </div>
+
+        {/* Background pattern overlay */}
+        <div
+          className="absolute inset-0 opacity-10 z-[1]"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          }}
+          aria-hidden="true"
+        />
+
+        <div className="relative z-[2] mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <h1
             id="contact-heading"
             className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white"
@@ -93,7 +110,7 @@ export default function ContactPage() {
 
       {/* Main Content */}
       <section
-        className="py-12 sm:py-16 lg:py-20"
+        className="py-12 sm:py-16 lg:py-20 bg-white"
         aria-labelledby="contact-form-heading"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -205,7 +222,7 @@ export default function ContactPage() {
               </h3>
               <p className="text-gray-600 text-sm mb-4">
                 Questions about courses, requirements, schedules, or the enrollment
-                process for grades 6-12.
+                process for high school students.
               </p>
               <a
                 href="/contact?subject=Enrollment%20Information"

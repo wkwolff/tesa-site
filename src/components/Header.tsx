@@ -46,7 +46,6 @@ export default function Header() {
           <Link
             href="/"
             className="flex items-center gap-2 focus-visible-ring rounded-lg"
-            aria-label="TESA - Home"
           >
             <Image
               src="/images/tesa_logo.png"

@@ -36,14 +36,14 @@ export const metadata: Metadata = {
     template: "%s | TESA",
   },
   description:
-    "Credit-bearing aerospace courses for grades 6-12. TESA prepares students for academic and technical rigor with hands-on STEM education, industry certifications, and mentorship.",
+    "Credit-bearing aerospace courses for high school students. TESA prepares students for academic and technical rigor with hands-on STEM education, industry certifications, and mentorship.",
   keywords: [
     "aerospace education",
     "STEM courses",
     "pre-college engineering",
     "MATLAB certification",
     "space education",
-    "6-12 grade courses",
+    "high school aerospace courses",
   ],
   authors: [{ name: "TESA - The Engineering and Science Academy" }],
   creator: "TESA",
@@ -62,13 +62,13 @@ export const metadata: Metadata = {
     siteName: "TESA - The Engineering and Science Academy",
     title: "TESA | The Engineering and Science Academy",
     description:
-      "Credit-bearing aerospace courses for grades 6-12. Preparing students for success in STEM majors.",
+      "Credit-bearing aerospace courses for high school students. Preparing students for success in STEM majors.",
   },
   twitter: {
     card: "summary_large_image",
     title: "TESA | The Engineering and Science Academy",
     description:
-      "Credit-bearing aerospace courses for grades 6-12. Preparing students for success in STEM majors.",
+      "Credit-bearing aerospace courses for high school students. Preparing students for success in STEM majors.",
     creator: "@tesa4space",
   },
   robots: {
@@ -96,7 +96,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${montserrat.variable}`}>
-      <body className="font-body antialiased min-h-screen flex flex-col">
+      <body className="font-body antialiased min-h-screen flex flex-col bg-white text-gray-900">
         <SkipNavLink />
         <Header />
         <main id="main-content" className="flex-1">

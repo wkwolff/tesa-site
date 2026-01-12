@@ -1,5 +1,9 @@
+"use client";
+
 import Link from "next/link";
+import { motion, useReducedMotion } from "motion/react";
 import { formatDate } from "@/lib/utils";
+import { cardHover } from "@/lib/animations";
 import type { BlogPostMeta } from "@/lib/blog-types";
 
 /**
@@ -14,8 +18,11 @@ interface BlogCardProps {
  *
  * Displays a blog post preview in a card format with title, date, excerpt, and tags.
  * Mobile-first design with proper touch targets.
+ * Includes hover animation with scale and shadow lift for enhanced interactivity.
  */
 export default function BlogCard({ post }: BlogCardProps) {
+  const shouldReduceMotion = useReducedMotion();
+
   // Truncate excerpt to 150 characters
   const truncatedExcerpt =
     post.excerpt.length > 150
@@ -23,7 +30,10 @@ export default function BlogCard({ post }: BlogCardProps) {
       : post.excerpt;
 
   return (
-    <article className="group bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg hover:border-primary/20 transition-all duration-300">
+    <motion.article
+      className="group bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg hover:border-primary/20 transition-all duration-300"
+      whileHover={shouldReduceMotion ? undefined : cardHover}
+    >
       {/* Card Content */}
       <div className="p-5 sm:p-6">
         {/* Tags */}
@@ -50,13 +60,17 @@ export default function BlogCard({ post }: BlogCardProps) {
           </Link>
         </h3>
 
-        {/* Date and Author */}
+        {/* Date, Author, and Reading Time */}
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-gray-500 mb-3">
           <time dateTime={post.date}>{formatDate(post.date)}</time>
           <span className="hidden sm:inline" aria-hidden="true">
             |
           </span>
           <span className="text-gray-600">{post.author}</span>
+          <span className="hidden sm:inline" aria-hidden="true">
+            |
+          </span>
+          <span className="text-gray-500">{post.readingTime} min read</span>
         </div>
 
         {/* Excerpt */}
@@ -87,6 +101,6 @@ export default function BlogCard({ post }: BlogCardProps) {
           </svg>
         </Link>
       </div>
-    </article>
+    </motion.article>
   );
 }

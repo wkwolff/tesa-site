@@ -61,7 +61,7 @@ function JsonLdSchema() {
     url: "https://tesa4space.org",
     logo: "https://tesa4space.org/images/tesa_logo.png",
     description:
-      "A pre-college hybrid school offering credit-bearing aerospace courses for grades 6-12, designed to prepare students for academic and technical rigor in STEM majors. TESA addresses the 60% first-year engineering attrition rate through hands-on learning, industry certifications, and mentorship.",
+      "A pre-college hybrid school offering credit-bearing aerospace courses for high school students, designed to prepare students for academic and technical rigor in STEM majors. TESA addresses the 60% first-year engineering attrition rate through hands-on learning, industry certifications, and mentorship.",
     email: "diallo@tesa4space.org",
     foundingDate: "2024",
     founder: {
@@ -116,11 +116,11 @@ function JsonLdSchema() {
       "Rocketry",
       "Orbital Mechanics",
     ],
-    educationalLevel: ["Middle School", "High School"],
+    educationalLevel: ["High School"],
     audience: {
       "@type": "EducationalAudience",
       educationalRole: "student",
-      audienceType: "Grades 6-12",
+      audienceType: "High School Students",
     },
   };
 
@@ -262,8 +262,25 @@ export default function AboutPage() {
       <JsonLdSchema />
 
       {/* Page Header */}
-      <section className="bg-gradient-to-br from-primary via-primary-800 to-secondary py-12 sm:py-16 lg:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+      <section className="relative bg-gradient-to-br from-primary via-primary-800 to-secondary py-12 sm:py-16 lg:py-20 overflow-hidden">
+        {/* Animated star field background */}
+        <div
+          className="star-field absolute inset-0 pointer-events-none"
+          aria-hidden="true"
+        >
+          <span className="star-field-large" />
+        </div>
+
+        {/* Background pattern overlay */}
+        <div
+          className="absolute inset-0 opacity-10 z-[1]"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          }}
+          aria-hidden="true"
+        />
+
+        <div className="relative z-[2] mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white">
             About TESA
           </h1>

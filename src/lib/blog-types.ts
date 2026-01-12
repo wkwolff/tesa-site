@@ -6,7 +6,10 @@ export interface BlogPostFrontmatter {
   date: string;
   excerpt: string;
   author: string;
+  authorImage?: string; // Path to author photo
   tags: string[];
+  featuredImage?: string; // Path to featured/hero image
+  featuredImageAlt?: string; // Alt text for featured image
 }
 
 /**
@@ -15,6 +18,7 @@ export interface BlogPostFrontmatter {
 export interface BlogPost extends BlogPostFrontmatter {
   slug: string;
   content: string;
+  readingTime: number; // Estimated minutes to read
 }
 
 /**
@@ -22,4 +26,5 @@ export interface BlogPost extends BlogPostFrontmatter {
  */
 export interface BlogPostMeta extends BlogPostFrontmatter {
   slug: string;
+  readingTime: number; // Estimated minutes to read
 }

@@ -13,6 +13,20 @@ export type { BlogPost, BlogPostMeta, BlogPostFrontmatter } from "./blog-types";
 // Path to blog content directory
 const BLOG_DIR = path.join(process.cwd(), "src/content/blog");
 
+// Average reading speed (words per minute)
+const WORDS_PER_MINUTE = 200;
+
+/**
+ * Calculate estimated reading time in minutes
+ */
+function calculateReadingTime(content: string): number {
+  // Strip HTML tags and count words
+  const text = content.replace(/<[^>]*>/g, "");
+  const words = text.trim().split(/\s+/).length;
+  const minutes = Math.ceil(words / WORDS_PER_MINUTE);
+  return Math.max(1, minutes); // Minimum 1 minute
+}
+
 /**
  * Get all blog post slugs for generateStaticParams
  */
@@ -45,7 +59,7 @@ export function getAllPosts(): BlogPostMeta[] {
       const slug = fileName.replace(/\.(mdx|md)$/, "");
       const filePath = path.join(BLOG_DIR, fileName);
       const fileContents = fs.readFileSync(filePath, "utf8");
-      const { data } = matter(fileContents);
+      const { data, content } = matter(fileContents);
 
       return {
         slug,
@@ -53,7 +67,11 @@ export function getAllPosts(): BlogPostMeta[] {
         date: data.date || new Date().toISOString().split("T")[0],
         excerpt: data.excerpt || "",
         author: data.author || "TESA Team",
+        authorImage: data.authorImage,
         tags: data.tags || [],
+        featuredImage: data.featuredImage,
+        featuredImageAlt: data.featuredImageAlt,
+        readingTime: calculateReadingTime(content),
       } as BlogPostMeta;
     });
 
@@ -96,7 +114,11 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
     date: data.date || new Date().toISOString().split("T")[0],
     excerpt: data.excerpt || "",
     author: data.author || "TESA Team",
+    authorImage: data.authorImage,
     tags: data.tags || [],
+    featuredImage: data.featuredImage,
+    featuredImageAlt: data.featuredImageAlt,
     content: contentHtml,
+    readingTime: calculateReadingTime(content),
   };
 }

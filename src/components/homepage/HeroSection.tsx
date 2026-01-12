@@ -5,8 +5,9 @@ import Link from "next/link";
  *
  * Homepage hero section with value proposition and primary CTA.
  * Mobile-first design with responsive typography and full-width CTAs on mobile.
+ * Features CSS-only animated star field background that respects prefers-reduced-motion.
  *
- * Key messaging: "Credit-bearing aerospace courses for grades 6-12"
+ * Key messaging: "Credit-bearing aerospace courses for high school students"
  */
 export default function HeroSection() {
   return (
@@ -14,16 +15,26 @@ export default function HeroSection() {
       className="relative bg-gradient-to-br from-primary via-primary-800 to-secondary overflow-hidden"
       aria-labelledby="hero-heading"
     >
+      {/* Animated star field background - CSS-only, respects prefers-reduced-motion */}
+      <div
+        className="star-field absolute inset-0 pointer-events-none"
+        data-testid="star-field"
+        aria-hidden="true"
+      >
+        {/* Third layer of stars (large 3px) - closest/fastest */}
+        <span className="star-field-large" />
+      </div>
+
       {/* Background pattern overlay */}
       <div
-        className="absolute inset-0 opacity-10"
+        className="absolute inset-0 opacity-10 z-[1]"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
         }}
         aria-hidden="true"
       />
 
-      <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 md:py-24 lg:px-8 lg:py-32">
+      <div className="relative z-[2] mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 md:py-24 lg:px-8 lg:py-32">
         <div className="text-center">
           {/* Main heading */}
           <h1
@@ -37,7 +48,7 @@ export default function HeroSection() {
           {/* Value proposition */}
           <p className="mx-auto mt-6 max-w-2xl text-lg text-gray-200 sm:text-xl md:text-2xl">
             Credit-bearing aerospace courses for{" "}
-            <span className="font-semibold text-white">grades 6-12</span>
+            <span className="font-semibold text-white whitespace-nowrap">high school students</span>
           </p>
 
           {/* Subheading */}
@@ -65,7 +76,7 @@ export default function HeroSection() {
       </div>
 
       {/* Bottom wave decoration */}
-      <div className="absolute bottom-0 left-0 right-0">
+      <div className="absolute bottom-0 left-0 right-0 z-[2]">
         <svg
           className="w-full h-12 sm:h-16 md:h-20 text-white"
           viewBox="0 0 1440 120"

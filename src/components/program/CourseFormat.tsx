@@ -147,60 +147,93 @@ export default function CourseFormat() {
               Sample 10-Week Course Schedule
             </h3>
 
-            <div className="space-y-4">
-              {[
-                { week: "1-2", phase: "Foundation", desc: "Core concepts & theory" },
-                { week: "3-4", phase: "Exploration", desc: "Guided practice & examples" },
-                { week: "5-6", phase: "Application", desc: "Hands-on project work" },
-                { week: "7-8", phase: "Integration", desc: "Real-world design challenges" },
-                { week: "9-10", phase: "Assessment", desc: "Project completion & review" },
-              ].map((item, index) => (
-                <div
-                  key={item.week}
-                  className="flex items-center gap-4 p-3 rounded-lg bg-surface hover:bg-primary/5 transition-colors"
-                >
-                  <div className="flex-shrink-0 h-10 w-16 rounded-lg bg-primary text-white font-bold text-sm flex items-center justify-center">
-                    Week {item.week}
-                  </div>
-                  <div className="flex-1">
-                    <p className="font-semibold text-surface-dark text-sm">
-                      {item.phase}
-                    </p>
-                    <p className="text-xs text-gray-500">{item.desc}</p>
-                  </div>
-                  <div className="flex-shrink-0">
-                    {index < 4 ? (
-                      <svg
-                        className="h-5 w-5 text-gray-300"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                        aria-hidden="true"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M19 9l-7 7-7-7"
-                        />
+            <div className="relative">
+              {/* Vertical timeline line */}
+              <div
+                className="absolute left-[39px] top-6 bottom-6 w-0.5 bg-gradient-to-b from-primary via-secondary to-accent"
+                aria-hidden="true"
+              />
+
+              <div className="space-y-3">
+                {[
+                  {
+                    week: "1-2",
+                    phase: "Foundation",
+                    desc: "Core concepts & theory",
+                    icon: (
+                      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                       </svg>
-                    ) : (
-                      <svg
-                        className="h-5 w-5 text-accent"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                          clipRule="evenodd"
-                        />
+                    )
+                  },
+                  {
+                    week: "3-4",
+                    phase: "Exploration",
+                    desc: "Guided practice & examples",
+                    icon: (
+                      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                       </svg>
-                    )}
+                    )
+                  },
+                  {
+                    week: "5-6",
+                    phase: "Application",
+                    desc: "Hands-on project work",
+                    icon: (
+                      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                    )
+                  },
+                  {
+                    week: "7-8",
+                    phase: "Integration",
+                    desc: "Real-world design challenges",
+                    icon: (
+                      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
+                      </svg>
+                    )
+                  },
+                  {
+                    week: "9-10",
+                    phase: "Assessment",
+                    desc: "Project completion & review",
+                    icon: (
+                      <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clipRule="evenodd" />
+                      </svg>
+                    )
+                  },
+                ].map((item) => (
+                  <div
+                    key={item.week}
+                    className="relative flex items-center gap-4 p-3 rounded-lg bg-surface hover:bg-primary/5 transition-colors"
+                  >
+                    {/* Timeline node */}
+                    <div className="flex-shrink-0 relative z-10">
+                      <div className="px-3 py-2 rounded-lg bg-primary text-white font-bold text-xs whitespace-nowrap shadow-sm">
+                        Week {item.week}
+                      </div>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="font-semibold text-surface-dark text-sm">
+                        {item.phase}
+                      </p>
+                      <p className="text-xs text-gray-600">{item.desc}</p>
+                    </div>
+                    {/* Phase icon */}
+                    <div
+                      className="flex-shrink-0 h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center text-primary"
+                      aria-hidden="true"
+                    >
+                      {item.icon}
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
 
             {/* Key Stat */}

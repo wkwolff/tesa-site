@@ -104,7 +104,7 @@ export default async function Image() {
               textAlign: "center",
             }}
           >
-            Credit-Bearing Aerospace Courses for Grades 6-12
+            Credit-Bearing Aerospace Courses for High School
           </div>
 
           {/* Credentials Bar */}

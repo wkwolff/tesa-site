@@ -24,7 +24,7 @@ describe("Homepage Components", () => {
       expect(
         screen.getByText(/credit-bearing aerospace courses/i)
       ).toBeInTheDocument();
-      expect(screen.getByText(/grades 6-12/i)).toBeInTheDocument();
+      expect(screen.getByText(/high school students/i)).toBeInTheDocument();
     });
 
     it("renders primary CTA button", () => {
@@ -89,11 +89,11 @@ describe("Homepage Components", () => {
   });
 
   describe("ProgramPathwayPreview", () => {
-    it("renders grade progression from 6th to 12th", () => {
+    it("renders high school grade progression from 9th to 12th", () => {
       render(<ProgramPathwayPreview />);
-      // Use getAllByText since 6th appears in heading and badges
-      const sixthElements = screen.getAllByText(/6th/i);
-      expect(sixthElements.length).toBeGreaterThan(0);
+      // Use getAllByText since 9th appears in badges
+      const ninthElements = screen.getAllByText(/9th/i);
+      expect(ninthElements.length).toBeGreaterThan(0);
       const twelfthElements = screen.getAllByText(/12th/i);
       expect(twelfthElements.length).toBeGreaterThan(0);
     });

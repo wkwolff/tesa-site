@@ -23,11 +23,11 @@ import ProgramPage from "@/app/program/page";
 
 describe("Program Overview Page", () => {
   describe("Learning Pathway", () => {
-    it("renders grade progression from 6th to 12th grade", () => {
+    it("renders high school grade progression from 9th to 12th grade", () => {
       render(<ProgramPage />);
       // Check for grade markers - multiple instances expected
-      const sixthGradeElements = screen.getAllByText(/6th/i);
-      expect(sixthGradeElements.length).toBeGreaterThan(0);
+      const ninthGradeElements = screen.getAllByText(/9th/i);
+      expect(ninthGradeElements.length).toBeGreaterThan(0);
       const twelfthGradeElements = screen.getAllByText(/12th/i);
       expect(twelfthGradeElements.length).toBeGreaterThan(0);
     });

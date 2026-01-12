@@ -175,7 +175,7 @@ describe("SEO Implementation", () => {
 describe("Page Metadata Validation", () => {
   it("all pages follow title pattern: Page Name | TESA", () => {
     const pageTitles = [
-      "TESA | Credit-Bearing Aerospace Courses for Grades 6-12", // Homepage (special case)
+      "TESA | Credit-Bearing Aerospace Courses for High School Students", // Homepage (special case)
       "About TESA | Founder & Mission",
       "Program Overview | TESA Aerospace Courses",
       "Scholarships | TESA Space Camp Opportunities",
@@ -194,9 +194,9 @@ describe("Page Metadata Validation", () => {
 
   it("all pages have unique descriptions between 100-300 characters", () => {
     const pageDescriptions = [
-      "The Engineering and Science Academy (TESA) offers credit-bearing aerospace courses for grades 6-12. Prepare your child for STEM success with hands-on learning, industry certifications in MATLAB and STK, and mentorship from aerospace professionals.",
+      "The Engineering and Science Academy (TESA) offers credit-bearing aerospace courses for high school students. Prepare your child for STEM success with hands-on learning, industry certifications in MATLAB and STK, and mentorship from aerospace professionals.",
       "Learn about The Engineering and Science Academy (TESA), our mission to prepare students for STEM success, and founder Diallo Wallace - Space Camp Hall of Fame 2025 inductee, Naval Academy professor, and Purdue PhD candidate.",
-      "Explore TESA's comprehensive STEM curriculum: 27 credit-bearing courses across Science, Technology, Engineering, and Mathematics for grades 6-12. Earn industry certifications in MATLAB, STK, and CAPM.",
+      "Explore TESA's comprehensive STEM curriculum: 27 credit-bearing courses across Science, Technology, Engineering, and Mathematics for high school students. Earn industry certifications in MATLAB, STK, and CAPM.",
       "TESA scholarship programs honor individuals who inspired dreams of space. Support student and educator attendance at Space Camp through the Fari, Mr. Veri, and Jim Irwin Scholarships.",
       "Partner with TESA to shape the future of aerospace education. Explore collaboration opportunities for educational institutions, industry leaders, and government funders supporting STEM education.",
       "Contact The Engineering and Science Academy (TESA) for enrollment information, partnership inquiries, scholarship applications, or general questions. Reach out to start your aerospace education journey.",

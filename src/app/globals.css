@@ -84,3 +84,142 @@ body {
     @apply outline-none ring-2 ring-secondary ring-offset-2;
   }
 }
+
+/**
+ * Enhanced Form Input Focus Animation
+ *
+ * Adds a subtle glow effect to form inputs on focus for enhanced visual feedback.
+ * Uses GPU-accelerated box-shadow for smooth performance.
+ * Respects prefers-reduced-motion by removing the glow animation.
+ */
+@layer components {
+  /* Form input focus glow effect */
+  input.focus-visible-ring:focus-visible,
+  textarea.focus-visible-ring:focus-visible,
+  select.focus-visible-ring:focus-visible {
+    box-shadow: 0 0 0 4px rgba(57, 73, 171, 0.15);
+    transition: box-shadow 0.2s ease-out;
+  }
+
+  /* Remove glow animation for users who prefer reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    input.focus-visible-ring:focus-visible,
+    textarea.focus-visible-ring:focus-visible,
+    select.focus-visible-ring:focus-visible {
+      box-shadow: none;
+      transition: none;
+    }
+  }
+}
+
+/**
+ * Star Field Background Animation
+ *
+ * CSS-only implementation using pseudo-elements and radial gradients.
+ * Three layers of stars with different sizes (1px, 2px, 3px) create depth.
+ * Respects prefers-reduced-motion for accessibility.
+ */
+@layer components {
+  .star-field {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  /* Small stars layer (1px) - furthest/slowest */
+  .star-field::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200%; /* Double height for seamless loop */
+    background-image:
+      radial-gradient(1px 1px at 20px 30px, rgba(255, 255, 255, 0.8), transparent),
+      radial-gradient(1px 1px at 40px 70px, rgba(255, 255, 255, 0.6), transparent),
+      radial-gradient(1px 1px at 80px 40px, rgba(255, 255, 255, 0.7), transparent),
+      radial-gradient(1px 1px at 110px 90px, rgba(255, 255, 255, 0.5), transparent),
+      radial-gradient(1px 1px at 160px 20px, rgba(255, 255, 255, 0.8), transparent),
+      radial-gradient(1px 1px at 200px 60px, rgba(255, 255, 255, 0.6), transparent),
+      radial-gradient(1px 1px at 250px 100px, rgba(255, 255, 255, 0.7), transparent),
+      radial-gradient(1px 1px at 300px 45px, rgba(255, 255, 255, 0.5), transparent),
+      radial-gradient(1px 1px at 350px 85px, rgba(255, 255, 255, 0.8), transparent),
+      radial-gradient(1px 1px at 400px 25px, rgba(255, 255, 255, 0.6), transparent),
+      radial-gradient(1px 1px at 450px 75px, rgba(255, 255, 255, 0.7), transparent),
+      radial-gradient(1px 1px at 500px 110px, rgba(255, 255, 255, 0.5), transparent),
+      radial-gradient(1px 1px at 550px 35px, rgba(255, 255, 255, 0.8), transparent),
+      radial-gradient(1px 1px at 600px 95px, rgba(255, 255, 255, 0.6), transparent),
+      radial-gradient(1px 1px at 650px 55px, rgba(255, 255, 255, 0.7), transparent),
+      radial-gradient(1px 1px at 700px 15px, rgba(255, 255, 255, 0.5), transparent);
+    background-size: 720px 200px;
+    background-repeat: repeat;
+    animation: starDrift 120s linear infinite;
+    opacity: 0.6;
+  }
+
+  /* Medium stars layer (2px) - middle distance/speed */
+  .star-field::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200%;
+    background-image:
+      radial-gradient(2px 2px at 50px 50px, rgba(255, 255, 255, 0.9), transparent),
+      radial-gradient(2px 2px at 120px 120px, rgba(255, 255, 255, 0.7), transparent),
+      radial-gradient(2px 2px at 220px 80px, rgba(255, 255, 255, 0.8), transparent),
+      radial-gradient(2px 2px at 320px 160px, rgba(255, 255, 255, 0.6), transparent),
+      radial-gradient(2px 2px at 420px 40px, rgba(255, 255, 255, 0.9), transparent),
+      radial-gradient(2px 2px at 520px 140px, rgba(255, 255, 255, 0.7), transparent),
+      radial-gradient(2px 2px at 620px 100px, rgba(255, 255, 255, 0.8), transparent),
+      radial-gradient(2px 2px at 720px 60px, rgba(255, 255, 255, 0.6), transparent);
+    background-size: 800px 180px;
+    background-repeat: repeat;
+    animation: starDrift 80s linear infinite;
+    opacity: 0.5;
+  }
+
+  /* Large stars layer (3px) - closest/fastest - using a wrapper span */
+  .star-field-large {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200%;
+    background-image:
+      radial-gradient(3px 3px at 100px 70px, rgba(255, 255, 255, 1), transparent),
+      radial-gradient(3px 3px at 300px 150px, rgba(255, 255, 255, 0.9), transparent),
+      radial-gradient(3px 3px at 500px 50px, rgba(255, 255, 255, 1), transparent),
+      radial-gradient(3px 3px at 700px 130px, rgba(255, 255, 255, 0.9), transparent),
+      radial-gradient(3px 3px at 900px 90px, rgba(255, 255, 255, 1), transparent);
+    background-size: 1000px 200px;
+    background-repeat: repeat;
+    animation: starDrift 50s linear infinite;
+    opacity: 0.4;
+  }
+}
+
+/* Star field animation keyframes */
+@keyframes starDrift {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+/**
+ * Accessibility: Disable star field animation when user prefers reduced motion
+ * Stars remain visible but static for users who are sensitive to motion
+ */
+@media (prefers-reduced-motion: reduce) {
+  .star-field::before,
+  .star-field::after,
+  .star-field-large {
+    animation: none;
+    transform: translateY(0);
+  }
+}

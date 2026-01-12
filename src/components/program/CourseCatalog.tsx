@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import CourseCard from "./CourseCard";
+import { AnimatedSection } from "@/components/ui/AnimatedSection";
+import { StaggerList, StaggerItem } from "@/components/ui/StaggerList";
 
 /**
  * CourseCatalog Component
@@ -11,6 +13,7 @@ import CourseCard from "./CourseCard";
  * Highlights foundational courses (Pre-Engineering and MATLAB).
  *
  * Mobile-first design with accessible ARIA tabs pattern.
+ * Enhanced with scroll-triggered animations and staggered card reveals.
  */
 
 // Course type definition
@@ -183,144 +186,151 @@ export default function CourseCatalog() {
   const filteredCourses = getFilteredCourses();
 
   return (
-    <section
-      className="py-12 sm:py-16 lg:py-20 bg-white"
-      aria-labelledby="catalog-heading"
-    >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center mb-10 sm:mb-14">
-          <p className="text-sm font-semibold uppercase tracking-wider text-secondary">
-            Comprehensive Curriculum
-          </p>
-          <h2
-            id="catalog-heading"
-            className="mt-2 font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-surface-dark"
+    <AnimatedSection>
+      <section
+        className="py-12 sm:py-16 lg:py-20 bg-white"
+        aria-labelledby="catalog-heading"
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          {/* Section Header */}
+          <div className="text-center mb-10 sm:mb-14">
+            <p className="text-sm font-semibold uppercase tracking-wider text-secondary">
+              Comprehensive Curriculum
+            </p>
+            <h2
+              id="catalog-heading"
+              className="mt-2 font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-surface-dark"
+            >
+              Course Catalog
+            </h2>
+            <p className="mt-4 max-w-2xl mx-auto text-base sm:text-lg text-gray-600">
+              27 credit-bearing courses across all STEM disciplines, designed
+              for high school students and approved by UC A-G.
+            </p>
+          </div>
+
+          {/* Category Tabs */}
+          <div
+            role="tablist"
+            aria-label="Course categories"
+            className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8"
           >
-            Course Catalog
-          </h2>
-          <p className="mt-4 max-w-2xl mx-auto text-base sm:text-lg text-gray-600">
-            27 credit-bearing courses across all STEM disciplines, designed
-            for grades 6-12 and approved by UC A-G.
-          </p>
-        </div>
-
-        {/* Category Tabs */}
-        <div
-          role="tablist"
-          aria-label="Course categories"
-          className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8"
-        >
-          {categories.map((category) => {
-            const isActive = activeCategory === category;
-            return (
-              <button
-                key={category}
-                role="tab"
-                aria-selected={isActive}
-                aria-controls={`${category.toLowerCase()}-courses`}
-                id={`tab-${category.toLowerCase()}`}
-                onClick={() => setActiveCategory(category)}
-                className={`
-                  min-h-touch px-4 py-2 rounded-full text-sm sm:text-base font-medium
-                  transition-all duration-200 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2
-                  ${
-                    isActive
-                      ? "bg-primary text-white shadow-md"
-                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                  }
-                `}
-              >
-                <span className="flex items-center gap-2">
-                  {category}
-                  <span
-                    className={`
-                      text-xs px-2 py-0.5 rounded-full
-                      ${isActive ? "bg-white/20" : "bg-gray-200"}
-                    `}
-                  >
-                    {categoryInfo[category].count}
-                  </span>
-                </span>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Foundational Courses Note */}
-        <div className="mb-8 p-4 bg-accent/10 rounded-lg border border-accent/30">
-          <p className="text-sm text-center text-gray-700">
-            <span className="inline-flex items-center gap-1 font-semibold text-accent-dark">
-              <svg
-                className="h-4 w-4"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                aria-hidden="true"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              Foundational courses
-            </span>{" "}
-            (Pre-Engineering and MATLAB) are the building blocks that all other
-            courses build upon.
-          </p>
-        </div>
-
-        {/* Course Grid */}
-        <div
-          id={`${activeCategory.toLowerCase()}-courses`}
-          role="tabpanel"
-          aria-labelledby={`tab-${activeCategory.toLowerCase()}`}
-          className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-        >
-          {filteredCourses.map((course) => (
-            <CourseCard
-              key={course.name}
-              name={course.name}
-              category={course.category}
-              isFoundational={course.isFoundational}
-              description={course.description}
-            />
-          ))}
-        </div>
-
-        {/* Course Count Summary */}
-        <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4">
-          {(["Science", "Technology", "Engineering", "Mathematics"] as const).map(
-            (cat) => (
-              <div
-                key={cat}
-                className="p-4 bg-surface rounded-lg text-center cursor-pointer hover:shadow-md transition-shadow"
-                onClick={() => setActiveCategory(cat)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    setActiveCategory(cat);
-                  }
-                }}
-              >
-                <div
-                  className={`h-10 w-10 mx-auto mb-2 rounded-full ${categoryInfo[cat].color} flex items-center justify-center`}
+            {categories.map((category) => {
+              const isActive = activeCategory === category;
+              return (
+                <button
+                  key={category}
+                  role="tab"
+                  aria-selected={isActive}
+                  aria-controls={`${category.toLowerCase()}-courses`}
+                  id={`tab-${category.toLowerCase()}`}
+                  onClick={() => setActiveCategory(category)}
+                  className={`
+                    min-h-touch px-4 py-2 rounded-full text-sm sm:text-base font-medium
+                    transition-all duration-200 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2
+                    ${
+                      isActive
+                        ? "bg-primary text-white shadow-md"
+                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    }
+                  `}
                 >
-                  <span className="text-white font-bold text-lg">
-                    {cat.charAt(0)}
+                  <span className="flex items-center gap-2">
+                    {category}
+                    <span
+                      className={`
+                        text-xs px-2 py-0.5 rounded-full
+                        ${isActive ? "bg-white/20" : "bg-gray-200"}
+                      `}
+                    >
+                      {categoryInfo[category].count}
+                    </span>
                   </span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Foundational Courses Note */}
+          <div className="mb-8 p-4 bg-accent/10 rounded-lg border border-accent/30">
+            <p className="text-sm text-center text-gray-700">
+              <span className="inline-flex items-center gap-1 font-semibold text-accent-dark">
+                <svg
+                  className="h-4 w-4"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  aria-hidden="true"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                Foundational courses
+              </span>{" "}
+              (Pre-Engineering and MATLAB) are the building blocks that all other
+              courses build upon.
+            </p>
+          </div>
+
+          {/* Course Grid with StaggerList */}
+          <div
+            role="tabpanel"
+            id={`${activeCategory.toLowerCase()}-courses`}
+            aria-labelledby={`tab-${activeCategory.toLowerCase()}`}
+          >
+            <StaggerList
+              key={activeCategory}
+              className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+            >
+              {filteredCourses.map((course) => (
+                <StaggerItem key={course.name}>
+                  <CourseCard
+                    name={course.name}
+                    category={course.category}
+                    isFoundational={course.isFoundational}
+                    description={course.description}
+                  />
+                </StaggerItem>
+              ))}
+            </StaggerList>
+          </div>
+
+          {/* Course Count Summary */}
+          <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {(["Science", "Technology", "Engineering", "Mathematics"] as const).map(
+              (cat) => (
+                <div
+                  key={cat}
+                  className="p-4 bg-surface rounded-lg text-center cursor-pointer hover:shadow-md transition-shadow"
+                  onClick={() => setActiveCategory(cat)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setActiveCategory(cat);
+                    }
+                  }}
+                >
+                  <div
+                    className={`h-10 w-10 mx-auto mb-2 rounded-full ${categoryInfo[cat].color} flex items-center justify-center`}
+                  >
+                    <span className="text-white font-bold text-lg">
+                      {cat.charAt(0)}
+                    </span>
+                  </div>
+                  <p className="font-semibold text-surface-dark">{cat}</p>
+                  <p className="text-sm text-gray-500">
+                    {categoryInfo[cat].count} courses
+                  </p>
                 </div>
-                <p className="font-semibold text-surface-dark">{cat}</p>
-                <p className="text-sm text-gray-500">
-                  {categoryInfo[cat].count} courses
-                </p>
-              </div>
-            )
-          )}
+              )
+            )}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </AnimatedSection>
   );
 }

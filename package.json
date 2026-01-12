@@ -11,7 +11,9 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
+    "@tailwindcss/typography": "^0.5.19",
     "gray-matter": "^4.0.3",
+    "motion": "^12.24.12",
     "next": "14.2.35",
     "react": "^18",
     "react-dom": "^18",

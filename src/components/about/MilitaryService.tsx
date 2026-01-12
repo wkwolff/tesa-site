@@ -1,3 +1,11 @@
+"use client";
+
+import Image from "next/image";
+import { motion, useReducedMotion } from "motion/react";
+import { AnimatedSection } from "@/components/ui/AnimatedSection";
+import { StaggerList, StaggerItem } from "@/components/ui/StaggerList";
+import { fadeInScale, defaultViewport } from "@/lib/animations";
+
 /**
  * MilitaryService Component
  *
@@ -8,8 +16,14 @@
  * - Awards and decorations list
  *
  * Mobile-first design with organized service sections.
+ * AnimatedSection wrapper for scroll-triggered fadeInUp animation.
+ * StaggerList applied to serviceHighlights and awards arrays.
+ *
+ * Photo integration: Pilot cockpit photo in main service section
  */
 export default function MilitaryService() {
+  const shouldReduceMotion = useReducedMotion();
+
   const serviceHighlights = [
     {
       id: "professor",
@@ -54,161 +68,188 @@ export default function MilitaryService() {
   ];
 
   return (
-    <section
-      className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-surface to-white"
-      aria-labelledby="military-heading"
-    >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center mb-10 sm:mb-14">
-          <p className="text-sm font-semibold uppercase tracking-wider text-secondary">
-            Service to Country
-          </p>
-          <h2
-            id="military-heading"
-            className="mt-2 font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-surface-dark"
-          >
-            Military Service
-          </h2>
-        </div>
+    <AnimatedSection>
+      <section
+        className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-surface to-white"
+        aria-labelledby="military-heading"
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          {/* Section Header */}
+          <div className="text-center mb-10 sm:mb-14">
+            <p className="text-sm font-semibold uppercase tracking-wider text-secondary">
+              Service to Country
+            </p>
+            <h2
+              id="military-heading"
+              className="mt-2 font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-surface-dark"
+            >
+              Military Service
+            </h2>
+          </div>
 
-        {/* Main Service Info */}
-        <div className="mb-10 sm:mb-14">
-          <div className="bg-gradient-to-br from-primary to-secondary rounded-2xl p-6 sm:p-8 lg:p-10 text-white">
-            <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-8">
-              {/* Military Icon */}
-              <div className="flex-shrink-0 w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center rounded-full bg-white/20">
+          {/* Main Service Info */}
+          <div className="mb-10 sm:mb-14">
+            <div className="bg-gradient-to-br from-primary to-secondary rounded-2xl p-6 sm:p-8 lg:p-10 text-white">
+              <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+                {/* Left: Icon and Content */}
+                <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-8 flex-1">
+                  {/* Military Icon */}
+                  <div className="flex-shrink-0 w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center rounded-full bg-white/20">
+                    <svg
+                      className="h-10 w-10 sm:h-12 sm:w-12"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={1.5}
+                      aria-hidden="true"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"
+                      />
+                    </svg>
+                  </div>
+
+                  {/* Content */}
+                  <div className="text-center sm:text-left flex-1">
+                    <h3 className="font-heading text-xl sm:text-2xl font-bold mb-2">
+                      Naval Aviator & Aerospace Engineering Duty Officer
+                    </h3>
+                    <p className="text-white/90 text-base sm:text-lg">
+                      NAVAIR Reserve Program | Lt. Commander, USN (Ret.)
+                    </p>
+                  </div>
+                </div>
+
+                {/* Right: Pilot Cockpit Photo */}
+                <motion.div
+                  className="flex-shrink-0 w-full sm:w-64 lg:w-72"
+                  initial={shouldReduceMotion ? false : "hidden"}
+                  whileInView="visible"
+                  viewport={defaultViewport}
+                  variants={fadeInScale}
+                >
+                  <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-lg ring-4 ring-white/20">
+                    <Image
+                      src="/images/experiences/pilot-cockpit.jpg"
+                      alt="Lt. Commander Diallo Wallace in military aircraft cockpit"
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 256px, 288px"
+                      className="object-cover"
+                    />
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+          </div>
+
+          {/* Service Highlights Grid - StaggerList for sequential reveal */}
+          <StaggerList
+            className="grid gap-6 md:grid-cols-2 mb-10 sm:mb-14"
+            staggerDelay={0.1}
+          >
+            {serviceHighlights.map((highlight) => (
+              <StaggerItem key={highlight.id}>
+                <div className="flex gap-4 p-6 bg-white rounded-xl shadow-sm border border-gray-100">
+                  <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <svg
+                      className="h-5 w-5"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      aria-hidden="true"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="font-heading text-lg font-semibold text-surface-dark mb-1">
+                      {highlight.title}
+                    </h3>
+                    <p className="text-sm text-gray-600">{highlight.description}</p>
+                  </div>
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerList>
+
+          {/* Two Column Layout: Reserve Tours + Awards */}
+          <div className="grid gap-8 lg:grid-cols-2">
+            {/* Reserve Tours */}
+            <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 sm:p-8">
+              <h3 className="font-heading text-lg font-semibold text-surface-dark mb-4 flex items-center gap-2">
                 <svg
-                  className="h-10 w-10 sm:h-12 sm:w-12"
+                  className="h-5 w-5 text-secondary"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  strokeWidth={1.5}
+                  strokeWidth={2}
                   aria-hidden="true"
                 >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"
+                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                   />
                 </svg>
-              </div>
-
-              {/* Content */}
-              <div className="text-center sm:text-left">
-                <h3 className="font-heading text-xl sm:text-2xl font-bold mb-2">
-                  Naval Aviator & Aerospace Engineering Duty Officer
-                </h3>
-                <p className="text-white/90 text-base sm:text-lg">
-                  NAVAIR Reserve Program | Lt. Commander, USN (Ret.)
-                </p>
-              </div>
+                Reserve Tours
+              </h3>
+              <ul className="space-y-3">
+                {reserveTours.map((tour, index) => (
+                  <li key={index} className="flex items-start gap-3">
+                    <span className="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-secondary/10 text-secondary text-xs font-semibold">
+                      {index + 1}
+                    </span>
+                    <span className="text-sm text-gray-700">{tour}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
-        </div>
 
-        {/* Service Highlights Grid */}
-        <div className="grid gap-6 md:grid-cols-2 mb-10 sm:mb-14">
-          {serviceHighlights.map((highlight) => (
-            <div
-              key={highlight.id}
-              className="flex gap-4 p-6 bg-white rounded-xl shadow-sm border border-gray-100"
-            >
-              <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-lg bg-primary/10 text-primary">
+            {/* Awards & Decorations - StaggerList for badge reveal */}
+            <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 sm:p-8">
+              <h3 className="font-heading text-lg font-semibold text-surface-dark mb-4 flex items-center gap-2">
                 <svg
-                  className="h-5 w-5"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
+                  className="h-5 w-5 text-accent"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
                   aria-hidden="true"
                 >
                   <path
-                    fillRule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
-                    clipRule="evenodd"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
                   />
                 </svg>
-              </div>
-              <div>
-                <h3 className="font-heading text-lg font-semibold text-surface-dark mb-1">
-                  {highlight.title}
-                </h3>
-                <p className="text-sm text-gray-600">{highlight.description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Two Column Layout: Reserve Tours + Awards */}
-        <div className="grid gap-8 lg:grid-cols-2">
-          {/* Reserve Tours */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 sm:p-8">
-            <h3 className="font-heading text-lg font-semibold text-surface-dark mb-4 flex items-center gap-2">
-              <svg
-                className="h-5 w-5 text-secondary"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                />
-              </svg>
-              Reserve Tours
-            </h3>
-            <ul className="space-y-3">
-              {reserveTours.map((tour, index) => (
-                <li key={index} className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-secondary/10 text-secondary text-xs font-semibold">
-                    {index + 1}
-                  </span>
-                  <span className="text-sm text-gray-700">{tour}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Awards & Decorations */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 sm:p-8">
-            <h3 className="font-heading text-lg font-semibold text-surface-dark mb-4 flex items-center gap-2">
-              <svg
-                className="h-5 w-5 text-accent"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
-                />
-              </svg>
-              Awards & Decorations
-            </h3>
-            <div className="flex flex-wrap gap-2">
-              {awards.map((award, index) => (
-                <span
-                  key={index}
-                  className={`inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-medium ${
-                    award.type === "personal"
-                      ? "bg-accent/20 text-accent-dark"
-                      : award.type === "unit"
-                      ? "bg-secondary/10 text-secondary"
-                      : "bg-primary/10 text-primary"
-                  }`}
-                >
-                  {award.name}
-                </span>
-              ))}
+                Awards & Decorations
+              </h3>
+              <StaggerList className="flex flex-wrap gap-2" staggerDelay={0.1}>
+                {awards.map((award, index) => (
+                  <StaggerItem key={index}>
+                    <span
+                      className={`inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-medium ${
+                        award.type === "personal"
+                          ? "bg-accent/20 text-accent-dark"
+                          : award.type === "unit"
+                          ? "bg-secondary/10 text-secondary"
+                          : "bg-primary/10 text-primary"
+                      }`}
+                    >
+                      {award.name}
+                    </span>
+                  </StaggerItem>
+                ))}
+              </StaggerList>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </AnimatedSection>
   );
 }

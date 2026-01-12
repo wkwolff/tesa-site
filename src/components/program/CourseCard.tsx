@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * CourseCard Component
  *
@@ -8,7 +10,11 @@
  * - Brief description placeholder
  *
  * Mobile-first responsive design with accessible markup.
+ * Enhanced with hover animation (scale 1.02, shadow lift).
  */
+
+import { motion, useReducedMotion } from "motion/react";
+import { cardHover } from "@/lib/animations";
 
 interface CourseCardProps {
   name: string;
@@ -123,10 +129,12 @@ export default function CourseCard({
   description,
 }: CourseCardProps) {
   const colors = categoryColors[category];
+  const shouldReduceMotion = useReducedMotion();
 
   return (
-    <article
-      className={`rounded-lg border ${colors.border} ${colors.bg} p-4 hover:shadow-md transition-shadow`}
+    <motion.article
+      className={`rounded-lg border ${colors.border} ${colors.bg} p-4 transition-all duration-200 ease-out hover:shadow-lg`}
+      whileHover={shouldReduceMotion ? undefined : cardHover}
     >
       {/* Header with badges */}
       <div className="flex flex-wrap items-start gap-2 mb-2">
@@ -159,9 +167,9 @@ export default function CourseCard({
       </div>
 
       {/* Course Name */}
-      <h4 className={`font-heading font-semibold ${colors.text} text-sm sm:text-base`}>
+      <h3 className={`font-heading font-semibold ${colors.text} text-sm sm:text-base`}>
         {name}
-      </h4>
+      </h3>
 
       {/* Description */}
       {description && (
@@ -169,6 +177,6 @@ export default function CourseCard({
           {description}
         </p>
       )}
-    </article>
+    </motion.article>
   );
 }

@@ -43,7 +43,7 @@ export default function EnrollmentCTA() {
                 clipRule="evenodd"
               />
             </svg>
-            <span>Grades 6-12</span>
+            <span>High School</span>
           </div>
           <div className="flex items-center justify-center gap-2 text-sm text-gray-700">
             <svg

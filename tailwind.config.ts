@@ -29,9 +29,9 @@ const config: Config = {
           dark: "#00227b",
         },
         accent: {
-          DEFAULT: "#d4a017", // Gold
-          light: "#ffcf40",
-          dark: "#9f7200",
+          DEFAULT: "#d4a017", // Bright gold - use on dark backgrounds
+          light: "#f0c14b", // Lighter gold
+          dark: "#8a6914", // Dark gold - use for text on light backgrounds (WCAG compliant)
         },
         highlight: {
           DEFAULT: "#c62828", // Red
@@ -73,16 +73,25 @@ const config: Config = {
       // Custom animations
       animation: {
         "fade-in": "fadeIn 0.3s ease-in-out",
+        // Star field animations - 3 different speeds for parallax depth effect
+        "star-drift-slow": "starDrift 120s linear infinite",
+        "star-drift-medium": "starDrift 80s linear infinite",
+        "star-drift-fast": "starDrift 50s linear infinite",
       },
       keyframes: {
         fadeIn: {
           "0%": { opacity: "0" },
           "100%": { opacity: "1" },
         },
+        // Star field drift animation - subtle vertical movement
+        starDrift: {
+          "0%": { transform: "translateY(0)" },
+          "100%": { transform: "translateY(-50%)" },
+        },
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
 };
 
 export default config;

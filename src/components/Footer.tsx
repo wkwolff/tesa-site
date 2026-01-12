@@ -36,7 +36,6 @@ export default function Footer() {
             <Link
               href="/"
               className="inline-flex items-center gap-2 focus-visible-ring rounded-lg"
-              aria-label="TESA - Home"
             >
               <Image
                 src="/images/tesa_logo.png"
@@ -50,7 +49,7 @@ export default function Footer() {
             </Link>
             <p className="mt-4 text-sm text-gray-300 max-w-xs">
               The Engineering and Science Academy - Credit-bearing aerospace
-              courses for grades 6-12.
+              courses for high school students.
             </p>
           </div>
 
@@ -112,9 +111,27 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className="mt-10 border-t border-primary-500 pt-8 lg:mt-12">
-          <p className="text-center text-sm text-gray-400">
+          <p className="text-center text-sm text-gray-400 mb-3">
             &copy; {currentYear} TESA - The Engineering and Science Academy. All
             rights reserved.
+          </p>
+          <p className="flex items-center justify-center gap-2 text-sm text-gray-400">
+            <span>Website by</span>
+            <a
+              href="https://wolffcreative.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-gray-400 hover:text-gray-300 transition-colors duration-200"
+            >
+              <Image
+                src="/images/Wolff_Creative_Icon.png"
+                alt=""
+                width={20}
+                height={20}
+                className="inline-block grayscale mix-blend-screen"
+              />
+              Wolff Creative
+            </a>
           </p>
         </div>
       </div>

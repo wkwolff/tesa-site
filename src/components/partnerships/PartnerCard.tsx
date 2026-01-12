@@ -1,3 +1,8 @@
+"use client";
+
+import { motion, useReducedMotion } from "motion/react";
+import { cardHover } from "@/lib/animations";
+
 /**
  * PartnerCard Props
  */
@@ -22,6 +27,8 @@ interface PartnerCardProps {
  * - Coming Soon treatment for potential funders
  *
  * Mobile-first design with consistent card sizing.
+ * Includes hover animation with scale and shadow lift.
+ * Maintains grayscale-to-color hover effect on logo.
  */
 export default function PartnerCard({
   name,
@@ -29,6 +36,8 @@ export default function PartnerCard({
   type,
   comingSoon = false,
 }: PartnerCardProps) {
+  const shouldReduceMotion = useReducedMotion();
+
   const typeColorMap = {
     Certification: "bg-primary/10 text-primary border-primary/20",
     Community: "bg-secondary/10 text-secondary border-secondary/20",
@@ -39,12 +48,13 @@ export default function PartnerCard({
   const typeColorClass = typeColorMap[type];
 
   return (
-    <div
+    <motion.div
       className={`group flex flex-col items-center justify-center p-6 sm:p-8 bg-white rounded-xl border ${
         comingSoon
           ? "border-dashed border-gray-300 bg-gray-50/50"
-          : "border-gray-100 hover:border-primary/20 hover:shadow-md"
+          : "border-gray-100 hover:border-primary/20 hover:shadow-lg"
       } transition-all h-full`}
+      whileHover={!comingSoon && !shouldReduceMotion ? cardHover : undefined}
     >
       {/* Coming Soon badge */}
       {comingSoon && (
@@ -101,6 +111,6 @@ export default function PartnerCard({
           {type} Partner
         </span>
       )}
-    </div>
+    </motion.div>
   );
 }

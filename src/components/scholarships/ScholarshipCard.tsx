@@ -1,4 +1,9 @@
+"use client";
+
+import Image from "next/image";
 import Link from "next/link";
+import { motion, useReducedMotion } from "motion/react";
+import { cardHover } from "@/lib/animations";
 
 /**
  * ScholarshipCard Props
@@ -16,8 +21,10 @@ interface ScholarshipCardProps {
   supports: string;
   /** Contact subject for inquiry */
   contactSubject: string;
-  /** Optional icon/image for visual interest */
+  /** Optional icon for visual interest (used if no image provided) */
   icon?: "star" | "graduation" | "rocket";
+  /** Optional image path for the honoree */
+  imageSrc?: string;
 }
 
 /**
@@ -30,6 +37,7 @@ interface ScholarshipCardProps {
  * - Application/inquiry CTA
  *
  * Mobile-first design with compelling storytelling focus.
+ * Includes hover animation for enhanced interactivity.
  */
 export default function ScholarshipCard({
   name,
@@ -39,7 +47,10 @@ export default function ScholarshipCard({
   supports,
   contactSubject,
   icon = "star",
+  imageSrc,
 }: ScholarshipCardProps) {
+  const shouldReduceMotion = useReducedMotion();
+
   const iconMap = {
     star: (
       <svg
@@ -101,7 +112,10 @@ export default function ScholarshipCard({
       : "bg-secondary/10 text-secondary border-secondary/20";
 
   return (
-    <article className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col h-full hover:shadow-md transition-shadow">
+    <motion.article
+      className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col h-full hover:shadow-lg transition-all"
+      whileHover={shouldReduceMotion ? undefined : cardHover}
+    >
       {/* Card Header */}
       <div className="bg-gradient-to-br from-primary/5 to-secondary/5 p-6 sm:p-8 border-b border-gray-100">
         <div className="flex items-start justify-between gap-4">
@@ -125,10 +139,22 @@ export default function ScholarshipCard({
             </p>
           </div>
 
-          {/* Icon */}
-          <div className="flex-shrink-0 p-3 bg-white rounded-xl shadow-sm">
-            {iconMap[icon]}
-          </div>
+          {/* Honoree Photo or Icon */}
+          {imageSrc ? (
+            <div className="flex-shrink-0 w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden shadow-md border-2 border-white">
+              <Image
+                src={imageSrc}
+                alt={`Photo of ${honoreeName}`}
+                width={96}
+                height={96}
+                className="w-full h-full object-cover object-[center_20%]"
+              />
+            </div>
+          ) : (
+            <div className="flex-shrink-0 p-3 bg-white rounded-xl shadow-sm">
+              {iconMap[icon]}
+            </div>
+          )}
         </div>
       </div>
 
@@ -184,6 +210,6 @@ export default function ScholarshipCard({
           Inquire About This Scholarship
         </Link>
       </div>
-    </article>
+    </motion.article>
   );
 }

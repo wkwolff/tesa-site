@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Certifications Component
  *
@@ -8,7 +10,11 @@
  *
  * Each certification includes logo placeholder and description.
  * Mobile-first responsive card layout.
+ * Enhanced with scroll-triggered animations and staggered badge reveals.
  */
+
+import { AnimatedSection } from "@/components/ui/AnimatedSection";
+import { StaggerList, StaggerItem } from "@/components/ui/StaggerList";
 
 interface CertificationData {
   name: string;
@@ -20,10 +26,10 @@ interface CertificationData {
 
 const certifications: CertificationData[] = [
   {
-    name: "MATLAB Certification",
+    name: "MATLAB Certified Associate",
     provider: "MathWorks",
     description:
-      "Industry-standard certification in MATLAB programming, recognized by aerospace companies and research institutions worldwide. Students gain proficiency in numerical computing, data analysis, and algorithm development.",
+      "Industry-standard certification in MATLAB programming, earned after completing foundational courses (Pre-Engineering + MATLAB) plus one application course. Recognized by aerospace companies and research institutions worldwide for proficiency in numerical computing, data analysis, and algorithm development.",
     color: "bg-orange-500",
     icon: (
       <svg
@@ -43,10 +49,10 @@ const certifications: CertificationData[] = [
     ),
   },
   {
-    name: "Satellite Toolkit (STK) Certification",
+    name: "Ansys STK Certifications",
     provider: "Ansys",
     description:
-      "Professional certification in STK software, the industry standard for modeling and analyzing space systems. Students learn orbital mechanics, mission planning, and satellite communication analysis.",
+      "Multiple progressive certifications in Systems Tool Kit (STK), the industry standard used by NASA and aerospace companies for mission modeling. Students earn certifications progressively after each space course, building expertise in orbital mechanics, mission planning, and satellite communication analysis.",
     color: "bg-blue-600",
     icon: (
       <svg
@@ -66,10 +72,10 @@ const certifications: CertificationData[] = [
     ),
   },
   {
-    name: "CAPM Certification",
+    name: "PMI CAPM Certification",
     provider: "Project Management Institute",
     description:
-      "Certified Associate in Project Management credential from PMI. Students learn project management fundamentals, preparing them for leadership roles in engineering projects and space missions.",
+      "Certified Associate in Project Management credential from PMI, earned in the senior year after building an established portfolio. This globally recognized credential prepares students for leadership roles in engineering projects and space missions, demonstrating project management competency to employers.",
     color: "bg-green-600",
     icon: (
       <svg
@@ -92,153 +98,154 @@ const certifications: CertificationData[] = [
 
 export default function Certifications() {
   return (
-    <section
-      className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-white to-surface"
-      aria-labelledby="certifications-heading"
-    >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center mb-10 sm:mb-14">
-          <p className="text-sm font-semibold uppercase tracking-wider text-accent">
-            Career Credentials
-          </p>
-          <h2
-            id="certifications-heading"
-            className="mt-2 font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-surface-dark"
-          >
-            Industry Certifications
-          </h2>
-          <p className="mt-4 max-w-2xl mx-auto text-base sm:text-lg text-gray-600">
-            TESA students earn professional certifications recognized by
-            aerospace companies and institutions worldwide.
-          </p>
-        </div>
-
-        {/* Certifications Grid */}
-        <div className="grid gap-6 md:grid-cols-3">
-          {certifications.map((cert) => (
-            <article
-              key={cert.name}
-              className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-shadow"
+    <AnimatedSection>
+      <section
+        className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-white to-surface"
+        aria-labelledby="certifications-heading"
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          {/* Section Header */}
+          <div className="text-center mb-10 sm:mb-14">
+            <p className="text-sm font-semibold uppercase tracking-wider text-accent">
+              Career Credentials
+            </p>
+            <h2
+              id="certifications-heading"
+              className="mt-2 font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-surface-dark"
             >
-              {/* Header with Icon */}
-              <div className={`${cert.color} px-6 py-8 text-center`}>
-                <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-white/20 mb-4">
-                  {cert.icon}
-                </div>
-                <h3 className="font-heading text-lg sm:text-xl font-bold text-white">
-                  {cert.name}
+              Industry Certifications
+            </h2>
+            <p className="mt-4 max-w-2xl mx-auto text-base sm:text-lg text-gray-600">
+              TESA students earn professional certifications recognized by
+              aerospace companies and institutions worldwide.
+            </p>
+          </div>
+
+          {/* Certifications Grid with StaggerList */}
+          <StaggerList className="grid gap-6 md:grid-cols-3">
+            {certifications.map((cert) => (
+              <StaggerItem key={cert.name}>
+                <article className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-shadow">
+                  {/* Header with Icon */}
+                  <div className={`${cert.color} px-6 py-8 text-center`}>
+                    <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-white/20 mb-4">
+                      {cert.icon}
+                    </div>
+                    <h3 className="font-heading text-lg sm:text-xl font-bold text-white">
+                      {cert.name}
+                    </h3>
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-6">
+                    {/* Provider Badge */}
+                    <div className="flex items-center gap-2 mb-4">
+                      <span className="text-xs font-semibold uppercase tracking-wide text-gray-500">
+                        Issued by
+                      </span>
+                      <span className="px-3 py-1 bg-surface rounded-full text-sm font-medium text-surface-dark">
+                        {cert.provider}
+                      </span>
+                    </div>
+
+                    {/* Description */}
+                    <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
+                      {cert.description}
+                    </p>
+                  </div>
+                </article>
+              </StaggerItem>
+            ))}
+          </StaggerList>
+
+          {/* Value Proposition */}
+          <div className="mt-12 bg-primary/5 rounded-2xl p-6 sm:p-8 border border-primary/10">
+            <div className="grid gap-6 md:grid-cols-2 items-center">
+              <div>
+                <h3 className="font-heading text-xl sm:text-2xl font-bold text-surface-dark mb-4">
+                  Why Certifications Matter
                 </h3>
+                <ul className="space-y-3 text-gray-700">
+                  <li className="flex items-start gap-3">
+                    <svg
+                      className="h-5 w-5 text-accent flex-shrink-0 mt-0.5"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      aria-hidden="true"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    <span>
+                      <strong>Industry Recognition:</strong> Used by NASA, Boeing,
+                      Lockheed Martin, and SpaceX
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <svg
+                      className="h-5 w-5 text-accent flex-shrink-0 mt-0.5"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      aria-hidden="true"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    <span>
+                      <strong>College Advantage:</strong> Stand out in university
+                      applications with professional credentials
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <svg
+                      className="h-5 w-5 text-accent flex-shrink-0 mt-0.5"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      aria-hidden="true"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    <span>
+                      <strong>Career Ready:</strong> Enter internships and
+                      first jobs with demonstrable skills
+                    </span>
+                  </li>
+                </ul>
               </div>
 
-              {/* Content */}
-              <div className="p-6">
-                {/* Provider Badge */}
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="text-xs font-semibold uppercase tracking-wide text-gray-500">
-                    Issued by
-                  </span>
-                  <span className="px-3 py-1 bg-surface rounded-full text-sm font-medium text-surface-dark">
-                    {cert.provider}
-                  </span>
+              {/* Stats */}
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-white rounded-xl p-4 text-center shadow-sm">
+                  <div className="text-3xl font-bold text-primary">3+</div>
+                  <p className="text-sm text-gray-600">Certification Types</p>
                 </div>
-
-                {/* Description */}
-                <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                  {cert.description}
-                </p>
-              </div>
-            </article>
-          ))}
-        </div>
-
-        {/* Value Proposition */}
-        <div className="mt-12 bg-primary/5 rounded-2xl p-6 sm:p-8 border border-primary/10">
-          <div className="grid gap-6 md:grid-cols-2 items-center">
-            <div>
-              <h3 className="font-heading text-xl sm:text-2xl font-bold text-surface-dark mb-4">
-                Why Certifications Matter
-              </h3>
-              <ul className="space-y-3 text-gray-700">
-                <li className="flex items-start gap-3">
-                  <svg
-                    className="h-5 w-5 text-accent flex-shrink-0 mt-0.5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <span>
-                    <strong>Industry Recognition:</strong> Used by NASA, Boeing,
-                    Lockheed Martin, and SpaceX
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <svg
-                    className="h-5 w-5 text-accent flex-shrink-0 mt-0.5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <span>
-                    <strong>College Advantage:</strong> Stand out in university
-                    applications with professional credentials
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <svg
-                    className="h-5 w-5 text-accent flex-shrink-0 mt-0.5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <span>
-                    <strong>Career Ready:</strong> Enter internships and
-                    first jobs with demonstrable skills
-                  </span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Stats */}
-            <div className="grid grid-cols-2 gap-4">
-              <div className="bg-white rounded-xl p-4 text-center shadow-sm">
-                <div className="text-3xl font-bold text-primary">3</div>
-                <p className="text-sm text-gray-600">Professional Certifications</p>
-              </div>
-              <div className="bg-white rounded-xl p-4 text-center shadow-sm">
-                <div className="text-3xl font-bold text-accent">100%</div>
-                <p className="text-sm text-gray-600">Industry-Recognized</p>
-              </div>
-              <div className="bg-white rounded-xl p-4 text-center shadow-sm">
-                <div className="text-3xl font-bold text-secondary">Global</div>
-                <p className="text-sm text-gray-600">Recognition</p>
-              </div>
-              <div className="bg-white rounded-xl p-4 text-center shadow-sm">
-                <div className="text-3xl font-bold text-green-600">STEM</div>
-                <p className="text-sm text-gray-600">Career Pathway</p>
+                <div className="bg-white rounded-xl p-4 text-center shadow-sm">
+                  <div className="text-3xl font-bold text-accent">100%</div>
+                  <p className="text-sm text-gray-600">Industry-Recognized</p>
+                </div>
+                <div className="bg-white rounded-xl p-4 text-center shadow-sm">
+                  <div className="text-3xl font-bold text-secondary">Global</div>
+                  <p className="text-sm text-gray-600">Recognition</p>
+                </div>
+                <div className="bg-white rounded-xl p-4 text-center shadow-sm">
+                  <div className="text-3xl font-bold text-green-600">Progressive</div>
+                  <p className="text-sm text-gray-600">STK Credentials</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </AnimatedSection>
   );
 }

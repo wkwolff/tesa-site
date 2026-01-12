@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { formatDate } from "@/lib/utils";
 import type { BlogPost } from "@/lib/blog-types";
@@ -120,22 +121,32 @@ export default function BlogPostLayout({ post }: BlogPostLayoutProps) {
         <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-gray-600">
           {/* Author */}
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
-              <svg
-                className="w-4 h-4 text-primary"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                />
-              </svg>
-            </div>
+            {post.authorImage ? (
+              <Image
+                src={post.authorImage}
+                alt={post.author}
+                width={32}
+                height={32}
+                className="w-8 h-8 rounded-full object-cover ring-2 ring-gray-200 shadow-sm"
+              />
+            ) : (
+              <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
+                <svg
+                  className="w-4 h-4 text-primary"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                  />
+                </svg>
+              </div>
+            )}
             <span className="font-medium">{post.author}</span>
           </div>
 
@@ -147,24 +158,64 @@ export default function BlogPostLayout({ post }: BlogPostLayoutProps) {
           <time dateTime={post.date} className="text-gray-500">
             {formatDate(post.date)}
           </time>
+
+          <span className="text-gray-300" aria-hidden="true">
+            |
+          </span>
+
+          {/* Reading Time */}
+          <span className="text-gray-500 flex items-center gap-1">
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            {post.readingTime} min read
+          </span>
         </div>
       </header>
 
+      {/* Featured Image */}
+      {post.featuredImage && (
+        <div className="mb-8 sm:mb-10 -mx-4 sm:mx-0">
+          <Image
+            src={post.featuredImage}
+            alt={post.featuredImageAlt || post.title}
+            width={1200}
+            height={630}
+            className="w-full h-auto rounded-none sm:rounded-xl shadow-lg"
+            priority
+          />
+        </div>
+      )}
+
       {/* Post Content */}
       <div
-        className="prose prose-gray prose-lg max-w-none mb-10
-          prose-headings:font-heading prose-headings:text-gray-900
-          prose-h1:text-2xl prose-h1:sm:text-3xl
-          prose-h2:text-xl prose-h2:sm:text-2xl
-          prose-h3:text-lg prose-h3:sm:text-xl
-          prose-p:text-gray-600 prose-p:leading-relaxed
-          prose-a:text-primary prose-a:no-underline hover:prose-a:underline
-          prose-strong:text-gray-900
-          prose-ul:text-gray-600 prose-ol:text-gray-600
-          prose-li:marker:text-primary
-          prose-code:text-primary prose-code:bg-gray-50 prose-code:px-1 prose-code:rounded
-          prose-pre:bg-gray-900 prose-pre:text-gray-100
-          prose-blockquote:border-l-primary prose-blockquote:text-gray-700"
+        className="prose prose-lg prose-gray max-w-none mb-10
+          prose-headings:font-heading prose-headings:text-gray-900 prose-headings:scroll-mt-20
+          prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-h2:pb-2 prose-h2:border-b prose-h2:border-gray-200
+          prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
+          prose-h4:text-lg prose-h4:mt-6 prose-h4:mb-2
+          prose-p:text-gray-600 prose-p:leading-relaxed prose-p:mb-6
+          prose-a:text-primary prose-a:font-medium prose-a:no-underline hover:prose-a:underline
+          prose-strong:text-gray-900 prose-strong:font-semibold
+          prose-ul:my-6 prose-ul:text-gray-600
+          prose-ol:my-6 prose-ol:text-gray-600
+          prose-li:my-2 prose-li:marker:text-primary
+          prose-code:text-primary prose-code:bg-gray-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-medium
+          prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-pre:rounded-lg prose-pre:shadow-md
+          prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-primary/5 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-r-lg prose-blockquote:text-gray-700 prose-blockquote:not-italic
+          prose-img:rounded-lg prose-img:shadow-md prose-img:my-8
+          prose-hr:border-gray-200 prose-hr:my-10"
         dangerouslySetInnerHTML={{ __html: post.content }}
       />
 
@@ -279,11 +330,21 @@ export default function BlogPostLayout({ post }: BlogPostLayoutProps) {
       {/* Author Bio */}
       <div className="mt-10 p-6 bg-gray-50 rounded-xl">
         <div className="flex items-start gap-4">
-          <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
-            <span className="text-white font-bold text-lg">
-              {post.author.charAt(0)}
-            </span>
-          </div>
+          {post.authorImage ? (
+            <Image
+              src={post.authorImage}
+              alt={post.author}
+              width={48}
+              height={48}
+              className="w-12 h-12 rounded-full object-cover flex-shrink-0 ring-2 ring-gray-200 shadow-sm"
+            />
+          ) : (
+            <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+              <span className="text-white font-bold text-lg">
+                {post.author.charAt(0)}
+              </span>
+            </div>
+          )}
           <div>
             <p className="font-medium text-gray-900">Written by</p>
             <p className="font-heading text-lg font-semibold text-primary">

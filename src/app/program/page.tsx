@@ -17,11 +17,11 @@ import {
 export const metadata: Metadata = {
   title: "Program Overview | TESA Aerospace Courses",
   description:
-    "Explore TESA's comprehensive STEM curriculum: 27 credit-bearing courses across Science, Technology, Engineering, and Mathematics for grades 6-12. Earn industry certifications in MATLAB, STK, and CAPM.",
+    "Explore TESA's comprehensive STEM curriculum: 27 credit-bearing courses across Science, Technology, Engineering, and Mathematics for high school students. Earn industry certifications in MATLAB, STK, and CAPM.",
   keywords: [
     "STEM curriculum",
     "aerospace courses",
-    "engineering education grades 6-12",
+    "high school engineering education",
     "MATLAB certification high school",
     "pre-college engineering program",
     "UC A-G approved courses",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Program Overview | TESA Aerospace Courses",
     description:
-      "27 credit-bearing STEM courses for grades 6-12. Earn industry certifications and prepare for aerospace careers with hands-on learning.",
+      "27 credit-bearing STEM courses for high school students. Earn industry certifications and prepare for aerospace careers with hands-on learning.",
     url: "https://tesa4space.org/program",
     siteName: "TESA - The Engineering and Science Academy",
     locale: "en_US",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Program Overview | TESA Aerospace Courses",
     description:
-      "27 credit-bearing STEM courses for grades 6-12. Industry certifications and hands-on aerospace education.",
+      "27 credit-bearing STEM courses for high school students. Industry certifications and hands-on aerospace education.",
   },
 };
 
@@ -60,13 +60,13 @@ function JsonLdSchema() {
     "@type": "Course",
     name: "TESA Aerospace Engineering Program",
     description:
-      "Comprehensive STEM curriculum spanning grades 6-12, featuring 27 credit-bearing courses in Science, Technology, Engineering, and Mathematics with industry-recognized certifications.",
+      "Comprehensive STEM curriculum for high school students, featuring 27 credit-bearing courses in Science, Technology, Engineering, and Mathematics with industry-recognized certifications.",
     provider: {
       "@type": "EducationalOrganization",
       name: "TESA - The Engineering and Science Academy",
       url: "https://tesa4space.org",
     },
-    educationalLevel: ["Middle School", "High School"],
+    educationalLevel: ["High School"],
     educationalCredentialAwarded: [
       "MATLAB Certification",
       "Ansys STK Certification",
@@ -104,7 +104,7 @@ function JsonLdSchema() {
     audience: {
       "@type": "EducationalAudience",
       educationalRole: "student",
-      audienceType: "Grades 6-12",
+      audienceType: "High School Students",
     },
     numberOfCredits: 27,
     occupationalCredentialAwarded: {
@@ -144,10 +144,27 @@ export default function ProgramPage() {
       <JsonLdSchema />
 
       {/* Page Header */}
-      <section className="bg-gradient-to-br from-primary via-primary-800 to-secondary py-12 sm:py-16 lg:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+      <section className="relative bg-gradient-to-br from-primary via-primary-800 to-secondary py-12 sm:py-16 lg:py-20 overflow-hidden">
+        {/* Animated star field background */}
+        <div
+          className="star-field absolute inset-0 pointer-events-none"
+          aria-hidden="true"
+        >
+          <span className="star-field-large" />
+        </div>
+
+        {/* Background pattern overlay */}
+        <div
+          className="absolute inset-0 opacity-10 z-[1]"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          }}
+          aria-hidden="true"
+        />
+
+        <div className="relative z-[2] mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-sm font-semibold uppercase tracking-wider text-accent">
-            Grades 6-12 Curriculum
+            High School Curriculum
           </p>
           <h1 className="mt-2 font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white">
             Program Overview
@@ -172,7 +189,7 @@ export default function ProgramPage() {
               <p className="text-sm text-gray-200">Certifications</p>
             </div>
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
-              <div className="text-2xl sm:text-3xl font-bold text-accent">7</div>
+              <div className="text-2xl sm:text-3xl font-bold text-accent">4</div>
               <p className="text-sm text-gray-200">Years of Growth</p>
             </div>
           </div>
