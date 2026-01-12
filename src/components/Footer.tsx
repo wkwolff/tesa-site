@@ -84,9 +84,8 @@ const socialLinks = [
 /**
  * Footer Component
  *
- * Site footer with TESA logo, contact information, quick navigation,
- * social links placeholder, and copyright notice.
- * Mobile-first responsive design.
+ * Site footer with TESA logo, quick navigation, social links,
+ * and copyright notice. Mobile-first responsive design.
  *
  * Performance optimizations:
  * - Logo uses next/image with proper sizes attribute
@@ -98,9 +97,9 @@ export default function Footer() {
   return (
     <footer className="bg-primary text-white">
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {/* Logo and Description */}
-          <div className="sm:col-span-2 lg:col-span-1">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {/* Logo, Description, and Contact */}
+          <div>
             <Link
               href="/"
               className="inline-flex items-center gap-2 focus-visible-ring rounded-lg"
@@ -119,6 +118,15 @@ export default function Footer() {
               The Engineering and Science Academy - Credit-bearing aerospace
               courses for high school students.
             </p>
+            <a
+              href="mailto:diallo@tesa4space.org"
+              className="mt-4 inline-flex items-center gap-2 text-sm text-gray-300 hover:text-white transition-colors focus-visible-ring rounded"
+            >
+              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+              </svg>
+              diallo@tesa4space.org
+            </a>
           </div>
 
           {/* Quick Links */}
@@ -127,7 +135,7 @@ export default function Footer() {
               Quick Links
             </h3>
             <nav aria-label="Footer navigation" className="mt-4">
-              <ul className="space-y-3">
+              <ul className="grid grid-cols-2 gap-x-4 gap-y-2">
                 {quickLinks.map((link) => (
                   <li key={link.href}>
                     <Link
@@ -142,46 +150,27 @@ export default function Footer() {
             </nav>
           </div>
 
-          {/* Contact Information */}
-          <div>
-            <h3 className="font-heading text-sm font-semibold uppercase tracking-wider text-accent">
-              Contact
-            </h3>
-            <div className="mt-4 space-y-3">
-              <p className="text-sm text-gray-300">
-                <a
-                  href="mailto:diallo@tesa4space.org"
-                  className="hover:text-white transition-colors focus-visible-ring rounded inline-block"
-                >
-                  diallo@tesa4space.org
-                </a>
-              </p>
-            </div>
-          </div>
-
           {/* Social Links */}
           <div>
             <h3 className="font-heading text-sm font-semibold uppercase tracking-wider text-accent">
-              Connect
+              Connect With Us
             </h3>
-            <div className="mt-4">
-              <p className="text-sm text-gray-400 mb-4">
-                Follow us on social media
-              </p>
-              <div className="flex space-x-4">
-                {socialLinks.map((social) => (
-                  <a
-                    key={social.name}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-accent transition-colors duration-200 focus-visible-ring rounded-lg p-1"
-                    aria-label={`Follow TESA on ${social.name}`}
-                  >
-                    {social.icon}
-                  </a>
-                ))}
-              </div>
+            <p className="mt-4 text-sm text-gray-300">
+              Follow TESA for updates on aerospace education and student achievements.
+            </p>
+            <div className="mt-4 flex space-x-3">
+              {socialLinks.map((social) => (
+                <a
+                  key={social.name}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex h-9 w-9 items-center justify-center rounded-full bg-primary-600 text-gray-300 hover:bg-accent hover:text-white transition-colors duration-200 focus-visible-ring"
+                  aria-label={`Follow TESA on ${social.name}`}
+                >
+                  {social.icon}
+                </a>
+              ))}
             </div>
           </div>
         </div>
