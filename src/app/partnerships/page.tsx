@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import {
   CurrentPartners,
+  CommunityEngagement,
   AccreditationBadge,
   PotentialFunders,
   PartnershipBenefits,
@@ -120,6 +121,9 @@ export default function PartnershipsPage() {
       <div className="flex flex-col">
         {/* Current Partners */}
         <CurrentPartners />
+
+        {/* Community Engagement - Shades of Blue Photos */}
+        <CommunityEngagement />
 
         {/* Accreditation Status */}
         <AccreditationBadge />

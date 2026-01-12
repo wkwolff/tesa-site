@@ -4,6 +4,7 @@ import {
   TrustSignals,
   AudienceCTAs,
   ProgramPathwayPreview,
+  TESAInAction,
   PartnerLogos,
   Testimonials,
 } from "@/components/homepage";
@@ -152,6 +153,9 @@ export default function HomePage() {
 
         {/* Program Pathway Preview */}
         <ProgramPathwayPreview />
+
+        {/* TESA in Action - Real Photos */}
+        <TESAInAction />
 
         {/* Partner Logos */}
         <PartnerLogos />

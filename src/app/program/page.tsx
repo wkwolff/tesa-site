@@ -8,6 +8,7 @@ import {
   EnrollmentCTA,
   OurApproach,
   GraduateProfile,
+  ProgramInAction,
 } from "@/components/program";
 
 /**
@@ -209,6 +210,9 @@ export default function ProgramPage() {
 
         {/* Our Approach: 4-Step Learning Process */}
         <OurApproach />
+
+        {/* Program in Action - Classroom Photos */}
+        <ProgramInAction />
 
         {/* Industry Certifications */}
         <Certifications />

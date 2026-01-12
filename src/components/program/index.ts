@@ -7,3 +7,4 @@ export { default as CareerOutcomes } from "./CareerOutcomes";
 export { default as EnrollmentCTA } from "./EnrollmentCTA";
 export { default as OurApproach } from "./OurApproach";
 export { default as GraduateProfile } from "./GraduateProfile";
+export { default as ProgramInAction } from "./ProgramInAction";
