@@ -1,7 +1,8 @@
 /**
  * CourseFormat Component
  *
- * Explains TESA's 10-week for-credit course structure:
+ * Explains TESA's category-based for-credit course structure:
+ * - Flexible category-based progression
  * - For-credit course format
  * - Hands-on learning approach
  * - Real-world design challenges
@@ -11,9 +12,9 @@
 export default function CourseFormat() {
   const features = [
     {
-      title: "10-Week Sessions",
+      title: "Flexible Progression",
       description:
-        "Intensive, focused learning in 10-week blocks that align with university semester formats. Each session delivers deep understanding of subject matter.",
+        "Courses are organized by category, not grade level. Students can enter at any stage and progress at their own pace without feeling behind.",
       icon: (
         <svg
           className="h-6 w-6"
@@ -26,7 +27,7 @@ export default function CourseFormat() {
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
-            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+            d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
           />
         </svg>
       ),
@@ -115,10 +116,10 @@ export default function CourseFormat() {
               How TESA Courses Work
             </h2>
             <p className="mt-4 text-base sm:text-lg text-gray-600 leading-relaxed">
-              TESA&apos;s innovative 10-week for-credit course format combines
-              rigorous academics with hands-on learning experiences. Students
-              don&apos;t just learn theory—they apply it to solve real-world
-              design challenges.
+              TESA&apos;s category-based curriculum combines rigorous academics
+              with hands-on learning experiences. Students don&apos;t just learn
+              theory—they apply it to solve real-world design challenges while
+              earning industry-recognized credentials.
             </p>
 
             {/* Feature Grid */}
@@ -141,10 +142,10 @@ export default function CourseFormat() {
             </div>
           </div>
 
-          {/* Visual - Course Timeline */}
+          {/* Visual - Student Pathway */}
           <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-8">
             <h3 className="font-heading text-lg font-semibold text-surface-dark mb-6">
-              Sample 10-Week Course Schedule
+              Your Path to Industry Credentials
             </h3>
 
             <div className="relative">
@@ -157,9 +158,9 @@ export default function CourseFormat() {
               <div className="space-y-3">
                 {[
                   {
-                    week: "1-2",
+                    stage: "1",
                     phase: "Foundation",
-                    desc: "Core concepts & theory",
+                    desc: "Pre-Engineering & MATLAB",
                     icon: (
                       <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
@@ -167,9 +168,9 @@ export default function CourseFormat() {
                     )
                   },
                   {
-                    week: "3-4",
+                    stage: "2",
                     phase: "Exploration",
-                    desc: "Guided practice & examples",
+                    desc: "Physics, Programming & Technical Writing",
                     icon: (
                       <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -177,45 +178,34 @@ export default function CourseFormat() {
                     )
                   },
                   {
-                    week: "5-6",
-                    phase: "Application",
-                    desc: "Hands-on project work",
+                    stage: "3",
+                    phase: "Specialization",
+                    desc: "Aerospace Engineering Disciplines",
                     icon: (
                       <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
                       </svg>
                     )
                   },
                   {
-                    week: "7-8",
-                    phase: "Integration",
-                    desc: "Real-world design challenges",
-                    icon: (
-                      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
-                      </svg>
-                    )
-                  },
-                  {
-                    week: "9-10",
-                    phase: "Assessment",
-                    desc: "Project completion & review",
+                    stage: "4",
+                    phase: "Certification",
+                    desc: "Industry Credentials & Capstone",
                     icon: (
                       <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clipRule="evenodd" />
+                        <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                       </svg>
                     )
                   },
                 ].map((item) => (
                   <div
-                    key={item.week}
+                    key={item.stage}
                     className="relative flex items-center gap-4 p-3 rounded-lg bg-surface hover:bg-primary/5 transition-colors"
                   >
                     {/* Timeline node */}
                     <div className="flex-shrink-0 relative z-10">
                       <div className="px-3 py-2 rounded-lg bg-primary text-white font-bold text-xs whitespace-nowrap shadow-sm">
-                        Week {item.week}
+                        Stage {item.stage}
                       </div>
                     </div>
                     <div className="flex-1 min-w-0">
@@ -252,7 +242,7 @@ export default function CourseFormat() {
                   />
                 </svg>
                 <span className="text-sm font-semibold text-accent-dark">
-                  University-ready curriculum in 10 weeks
+                  Enter at any stage, progress at your pace
                 </span>
               </div>
             </div>

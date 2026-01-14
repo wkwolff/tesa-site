@@ -77,11 +77,6 @@ function JsonLdSchema() {
       {
         "@type": "CourseInstance",
         courseMode: "Hybrid",
-        duration: "P10W",
-        courseSchedule: {
-          "@type": "Schedule",
-          repeatFrequency: "P1W",
-        },
       },
     ],
     about: [
@@ -127,9 +122,9 @@ function JsonLdSchema() {
  * ProgramPage Component
  *
  * Program Overview page featuring:
- * - Visual learning pathway from 6th to 12th grade (with KSAs and opportunities)
+ * - Visual learning pathway (category-based, with KSAs and opportunities)
  * - Complete course catalog organized by STEM categories
- * - 10-week course format explanation
+ * - Course format explanation (flexible, category-based progression)
  * - Our Approach: 4-step learning process and teaching methods
  * - Industry certifications section
  * - Career outcomes and salary information
@@ -205,7 +200,7 @@ export default function ProgramPage() {
         {/* Course Catalog */}
         <CourseCatalog />
 
-        {/* 10-Week Course Format */}
+        {/* Course Format - Category-Based Progression */}
         <CourseFormat />
 
         {/* Our Approach: 4-Step Learning Process */}

@@ -9,42 +9,32 @@
  * - Community engagement events
  *
  * Mobile-first responsive grid with optimized images.
+ * Clicking any image opens a fullscreen gallery with all TESA photos.
  */
 
+import { useState } from "react";
 import Image from "next/image";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { StaggerList, StaggerItem } from "@/components/ui/StaggerList";
+import { ImageGallery } from "@/components/ui/ImageGallery";
+import { galleryImages } from "@/data/gallery-images";
 
-interface ActionImage {
-  src: string;
-  alt: string;
-  caption: string;
-}
-
-const actionImages: ActionImage[] = [
-  {
-    src: "/images/homepage/tesa-in-action/spacesuit.jpg",
-    alt: "Diallo Wallace in spacesuit during Mars simulation research",
-    caption: "Mars Research Mission",
-  },
-  {
-    src: "/images/homepage/tesa-in-action/hall-of-fame-jacket.jpg",
-    alt: "Space Camp Hall of Fame jacket worn by Diallo Wallace",
-    caption: "Space Camp Hall of Fame 2025",
-  },
-  {
-    src: "/images/homepage/tesa-in-action/elite-week-event.jpg",
-    alt: "Diallo Wallace speaking at Elite Week aerospace education event",
-    caption: "Elite Week Aerospace Event",
-  },
-  {
-    src: "/images/homepage/tesa-in-action/classroom-instruction.jpg",
-    alt: "TESA classroom instruction with students engaged in STEM learning",
-    caption: "Hands-On STEM Instruction",
-  },
-];
+// Featured images shown in the grid (first 4 from gallery)
+const featuredImages = galleryImages.slice(0, 4);
 
 export default function TESAInAction() {
+  const [galleryState, setGalleryState] = useState<{
+    isOpen: boolean;
+    startIndex: number;
+  } | null>(null);
+
+  const openGallery = (index: number) => {
+    setGalleryState({ isOpen: true, startIndex: index });
+  };
+
+  const closeGallery = () => {
+    setGalleryState(null);
+  };
   return (
     <AnimatedSection>
       <section
@@ -74,9 +64,13 @@ export default function TESAInAction() {
             className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"
             staggerDelay={0.1}
           >
-            {actionImages.map((image) => (
-              <StaggerItem key={image.src}>
-                <figure className="group relative aspect-[4/3] overflow-hidden rounded-xl bg-gray-100">
+            {featuredImages.map((image, index) => (
+              <StaggerItem key={image.id}>
+                <button
+                  onClick={() => openGallery(index)}
+                  className="group relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-gray-100 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                  aria-label={`View ${image.caption} - opens gallery`}
+                >
                   <Image
                     src={image.src}
                     alt={image.alt}
@@ -85,17 +79,47 @@ export default function TESAInAction() {
                     className="object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                   {/* Caption Overlay */}
-                  <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-3 sm:p-4">
-                    <p className="text-xs sm:text-sm font-medium text-white">
+                  <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-3 sm:p-4">
+                    <span className="block text-xs sm:text-sm font-medium text-white text-left">
                       {image.caption}
-                    </p>
-                  </figcaption>
-                </figure>
+                    </span>
+                  </span>
+                  {/* View gallery indicator */}
+                  <span className="absolute top-2 right-2 p-1.5 bg-black/40 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                    <svg
+                      className="w-4 h-4 text-white"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                      aria-hidden="true"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
+                      />
+                    </svg>
+                  </span>
+                </button>
               </StaggerItem>
             ))}
           </StaggerList>
+
+          {/* Hint text */}
+          <p className="mt-4 text-center text-sm text-gray-500">
+            Click any image to view the full gallery
+          </p>
         </div>
       </section>
+
+      {/* Fullscreen Gallery Modal */}
+      <ImageGallery
+        isOpen={galleryState?.isOpen ?? false}
+        startIndex={galleryState?.startIndex ?? 0}
+        images={galleryImages}
+        onClose={closeGallery}
+      />
     </AnimatedSection>
   );
 }

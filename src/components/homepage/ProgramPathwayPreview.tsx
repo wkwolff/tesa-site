@@ -319,7 +319,7 @@ export default function ProgramPathwayPreview() {
 
                     {/* Content card - enhanced */}
                     <motion.div
-                      className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden text-center h-full transition-all duration-200 hover:shadow-lg hover:border-primary/20"
+                      className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden text-center transition-all duration-200 hover:shadow-lg hover:border-primary/20"
                       whileHover={shouldReduceMotion ? undefined : cardHover}
                     >
                       {/* Top accent bar */}
@@ -348,40 +348,52 @@ export default function ProgramPathwayPreview() {
           </div>
         </div>
 
-        {/* STEM Categories summary - enhanced with distinct colors, centered under pathway cards */}
+        {/* STEM Categories - visually separated from pathway to avoid implying 1:1 alignment */}
         <motion.div
-          className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-4"
+          className="mt-10 bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-8"
           initial={shouldReduceMotion ? false : "hidden"}
           whileInView="visible"
           viewport={defaultViewport}
-          variants={staggerContainer}
+          variants={staggerItem}
         >
-          {stemCategories.map((stem) => {
-            const colors = categoryColors[stem.category];
-            return (
-              <motion.div
-                key={stem.category}
-                className="flex justify-center"
-                variants={staggerItem}
-              >
-                <div
-                  className={`p-5 ${colors.bg} rounded-xl border-2 ${colors.border} ${colors.hoverBorder} shadow-sm transition-all duration-200 hover:shadow-lg text-center w-[85%]`}
-                >
-                {/* Icon container - enhanced */}
-                <div
-                  className={`h-12 w-12 mx-auto mb-3 rounded-xl ${colors.icon} flex items-center justify-center ${colors.text}`}
-                  aria-hidden="true"
-                >
-                  {categoryIcons[stem.category]}
-                </div>
-                  <p className={`font-semibold ${colors.text}`}>
-                    {stem.category}
-                  </p>
-                  <p className="text-sm text-gray-600">{stem.count} courses</p>
-                </div>
-              </motion.div>
-            );
-          })}
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+            {/* Left side - explanation */}
+            <div className="lg:max-w-sm">
+              <h3 className="font-heading text-lg font-semibold text-surface-dark">
+                Courses Across All STEM Disciplines
+              </h3>
+              <p className="mt-2 text-sm text-gray-600">
+                At each stage, students take courses from multiple STEM categories—building
+                interdisciplinary skills throughout their journey.
+              </p>
+            </div>
+
+            {/* Right side - STEM category pills in a flowing layout */}
+            <div className="flex flex-wrap gap-3 lg:gap-4">
+              {stemCategories.map((stem) => {
+                const colors = categoryColors[stem.category];
+                return (
+                  <div
+                    key={stem.category}
+                    className={`flex items-center gap-3 px-4 py-3 ${colors.bg} rounded-full border ${colors.border} ${colors.hoverBorder} transition-colors`}
+                  >
+                    <div
+                      className={`h-8 w-8 rounded-full ${colors.icon} flex items-center justify-center ${colors.text}`}
+                      aria-hidden="true"
+                    >
+                      {categoryIcons[stem.category]}
+                    </div>
+                    <div className="pr-1">
+                      <p className={`font-semibold text-sm ${colors.text}`}>
+                        {stem.category}
+                      </p>
+                      <p className="text-xs text-gray-500">{stem.count} courses</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </motion.div>
 
         {/* CTA */}

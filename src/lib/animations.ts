@@ -153,3 +153,61 @@ export function calculateStaggerDelay(
   // Calculate adjusted delay to fit within max duration
   return Math.max(0.05, (maxTotalDuration - baseDuration) / (itemCount - 1));
 }
+
+/**
+ * Gallery backdrop fade animation
+ * Used for modal overlay
+ */
+export const galleryBackdrop: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { duration: 0.3, ease: "easeOut" },
+  },
+  exit: {
+    opacity: 0,
+    transition: { duration: 0.2, ease: "easeIn" },
+  },
+};
+
+/**
+ * Gallery image scale animation
+ * Used for modal content appearance
+ */
+export const galleryImage: Variants = {
+  hidden: {
+    opacity: 0,
+    scale: 0.9,
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.3, ease: "easeOut" },
+  },
+  exit: {
+    opacity: 0,
+    scale: 0.9,
+    transition: { duration: 0.2, ease: "easeIn" },
+  },
+};
+
+/**
+ * Gallery slide animation for image transitions
+ * Direction: 1 = next (slide left), -1 = prev (slide right)
+ */
+export const gallerySlide: Variants = {
+  enter: (direction: number) => ({
+    x: direction > 0 ? 100 : -100,
+    opacity: 0,
+  }),
+  center: {
+    x: 0,
+    opacity: 1,
+    transition: { duration: 0.3, ease: "easeOut" },
+  },
+  exit: (direction: number) => ({
+    x: direction < 0 ? 100 : -100,
+    opacity: 0,
+    transition: { duration: 0.2, ease: "easeIn" },
+  }),
+};
