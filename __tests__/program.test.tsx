@@ -165,13 +165,13 @@ describe("Program Overview Page", () => {
   });
 
   describe("Course Format Section", () => {
-    it("explains 10-week for-credit course structure", () => {
+    it("explains flexible credit-bearing course structure", () => {
       render(<ProgramPage />);
-      // Multiple mentions of 10-week possible
-      const tenWeekElements = screen.getAllByText(/10-week/i);
-      expect(tenWeekElements.length).toBeGreaterThan(0);
-      const forCreditElements = screen.getAllByText(/for-credit/i);
-      expect(forCreditElements.length).toBeGreaterThan(0);
+      // Check for flexible progression and credit-bearing content
+      const flexibleElements = screen.getAllByText(/flexible/i);
+      expect(flexibleElements.length).toBeGreaterThan(0);
+      const creditElements = screen.getAllByText(/credit-bearing|for-credit/i);
+      expect(creditElements.length).toBeGreaterThan(0);
     });
 
     it("mentions hands-on learning approach", () => {

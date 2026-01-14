@@ -33,11 +33,11 @@ describe("About TESA Page", () => {
       expect(attritionTextElements.length).toBeGreaterThan(0);
     });
 
-    it("mentions 10-week for-credit course format", () => {
+    it("mentions credit-bearing course format", () => {
       render(<AboutPage />);
-      expect(screen.getByText(/10-week/i)).toBeInTheDocument();
-      // "for-credit" is part of "10-week for-credit courses"
-      expect(screen.getByText(/for-credit/i)).toBeInTheDocument();
+      // Check for credit-bearing courses content
+      const creditElements = screen.getAllByText(/credit-bearing/i);
+      expect(creditElements.length).toBeGreaterThan(0);
     });
 
     it("lists certifications offered: MATLAB, STK, CAPM", () => {
