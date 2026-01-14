@@ -52,7 +52,7 @@ export default function MissionSection() {
               <p className="text-gray-600">
                 Through{" "}
                 <span className="font-semibold text-primary">
-                  10-week for-credit courses
+                  credit-bearing courses
                 </span>
                 , students tackle real-world design challenges and earn
                 industry-recognized certifications used by aerospace
